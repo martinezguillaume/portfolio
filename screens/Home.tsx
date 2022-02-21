@@ -1,14 +1,16 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Box, Fab, useColorMode, Text } from "native-base";
 import { FC } from "react";
-import { Text, View } from "react-native";
 import { RootStackParamList } from "~/types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 export const HomeScreen: FC<Props> = () => {
+  const { toggleColorMode } = useColorMode();
   return (
-    <View>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Box>
+      <Text>Open up App.tsx to start working osn your app!</Text>
+      <Fab onPress={toggleColorMode} />
+    </Box>
   );
 };
