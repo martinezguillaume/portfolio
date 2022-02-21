@@ -31,7 +31,6 @@
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"],
         "newlines-between": "always"
       }
     ]
