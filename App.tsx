@@ -2,10 +2,14 @@ import { INativebaseConfig, NativeBaseProvider, StorageManager } from 'native-ba
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import i18n from 'i18n-js'
 import * as Localization from 'expo-localization'
+import { Asset } from 'expo-asset'
+import { useCallback, useState } from 'react'
+import AppLoading from 'expo-app-loading'
 
 import { Navigation } from './navigation'
 import en from './locales/en.json'
 import fr from './locales/fr.json'
+import { IMAGES } from './assets'
 
 // Localization config
 /* eslint-disable import/no-named-as-default-member */
@@ -42,6 +46,26 @@ const config: INativebaseConfig = {
 }
 
 export default function App() {
+  const [isReady, setIsReady] = useState(false)
+
+  const loadAssets = useCallback(async () => {
+    const cacheImages = Object.values(IMAGES).map((image) => {
+      return Asset.fromModule(image).downloadAsync()
+    })
+
+    await Promise.all([cacheImages])
+  }, [])
+
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadAssets}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    )
+  }
+
   return (
     <NativeBaseProvider colorModeManager={colorModeManager} config={config}>
       <Navigation />

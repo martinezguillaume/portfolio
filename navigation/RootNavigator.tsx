@@ -6,7 +6,7 @@ import { RootStackParamList } from '~/types'
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 export const RootNavigator = () => (
-  <RootStack.Navigator>
+  <RootStack.Navigator screenOptions={{ headerShown: false }}>
     <RootStack.Screen name="Home" component={HomeScreen} />
   </RootStack.Navigator>
 )
