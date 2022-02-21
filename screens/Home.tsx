@@ -1,50 +1,38 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Fab, useColorMode, Image, ScrollView, Text, Box, Avatar } from 'native-base'
+import { t } from 'i18n-js'
+import { Box, Fab, Icon, Text, useColorMode } from 'native-base'
 import { FC } from 'react'
 import { StyleSheet } from 'react-native'
-import Animated, {
-  useSharedValue,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  interpolateNode,
-  interpolate,
-  Extrapolation,
-} from 'react-native-reanimated'
+import { Feather } from '@native-base/icons'
 
-import { IMAGES } from '~/assets'
+import { HomeScrollView } from '~/components'
 import { RootStackParamList } from '~/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 
-const AnimatedImage = Animated.createAnimatedComponent(Image)
-const AnimatedAvatar = Animated.createAnimatedComponent(Avatar)
-
 export const HomeScreen: FC<Props> = () => {
   const { toggleColorMode } = useColorMode()
-  const translationY = useSharedValue(0)
-
-  const scrollHandler = useAnimatedScrollHandler((event) => {
-    translationY.value = event.contentOffset.y
-  })
-
-  const coverStyle = useAnimatedStyle(() => {
-    return {
-      height: interpolate(translationY.value, [-100, 0, 100], [300, 200, 100], {
-        extrapolateRight: Extrapolation.CLAMP,
-      }),
-    }
-  })
-
   return (
     <>
-      <AnimatedImage source={IMAGES.cover} style={[styles.cover, coverStyle]} />
+      <HomeScrollView contentContainerStyle={styles.scrollViewContent}>
+        <Text fontSize={16} fontWeight={800}>
+          Guillaume Martinez
+        </Text>
+        <Text color="muted.500">@martinezguillaume</Text>
 
-      <Animated.ScrollView
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}
-        contentContainerStyle={{ paddingTop: 200 }}>
-        <Text>Salut</Text>
-      </Animated.ScrollView>
+        <Text mt={4}>{t('home.description')}</Text>
+
+        <Box flexDirection="row" mt={4} alignItems="center">
+          <Text fontSize={12} ml={1} color="blue.500" width={100} numberOfLines={1}>
+            <Icon color="muted.500" size="4" as={Feather} name="link" />{' '}
+            martinezguillaume.github.com
+          </Text>
+          <Text fontSize={12} ml={2} color="muted.500" numberOfLines={1}>
+            <Icon color="muted.500" size="4" as={Feather} name="calendar" /> {t('home.date_title')}
+          </Text>
+        </Box>
+        <Box height={3000} />
+      </HomeScrollView>
 
       <Fab onPress={toggleColorMode} />
     </>
@@ -52,12 +40,7 @@ export const HomeScreen: FC<Props> = () => {
 }
 
 const styles = StyleSheet.create({
-  cover: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    width: '100%',
-    resizeMode: 'cover',
+  scrollViewContent: {
+    paddingHorizontal: 16,
   },
 })

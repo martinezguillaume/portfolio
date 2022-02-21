@@ -1,5 +1,7 @@
 {
   "home": {
-    "test": "en francais"
+    "test": "en francais",
+    "description": "Je travaille depuis 5 ans sur du développement Javascript, et plus particulièrement sur du développement React/React Native, allant de la création de l'architecture du projet jusqu'à sa mise en production, avec même une partie création UI/UX pour certains.\nJ'ai développé une demi dizaine d'applications mobiles qui sont maintenant sur les stores ainsi que des site web.",
+    "date_title": "Développeur depuis septembre 2019"
   }
 }
