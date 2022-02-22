@@ -1,6 +1,6 @@
-import { Image, Text, useColorMode, useColorModeValue } from 'native-base'
+import { Avatar, Box, Image, Text, useColorMode, useColorModeValue } from 'native-base'
 import { memo } from 'react'
-import { ScrollViewProps, StyleSheet } from 'react-native'
+import { ScrollViewProps, StyleSheet, Platform } from 'react-native'
 import Animated, {
   Extrapolation,
   interpolate,
@@ -16,8 +16,8 @@ import { IMAGES } from '~/assets'
 
 export type HomeScrollViewProps = ScrollViewProps
 
-const COVER_HEIGHT = 200
-const COVER_HEIGHT_SMALL = 100
+const HEADER_HEIGHT = 200
+const HEADER_HEIGHT_SMALL = 100
 const AVATAR_SIZE = 120
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
@@ -32,12 +32,12 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
     translationY.value = event.contentOffset.y
   })
 
-  const coverStyle = useAnimatedStyle(() => {
+  const headerStyle = useAnimatedStyle(() => {
     return {
       height: interpolate(
         translationY.value,
-        [0, COVER_HEIGHT_SMALL],
-        [COVER_HEIGHT, COVER_HEIGHT_SMALL],
+        [0, HEADER_HEIGHT_SMALL],
+        [HEADER_HEIGHT, HEADER_HEIGHT_SMALL],
         {
           extrapolateRight: Extrapolation.CLAMP,
         }
@@ -48,26 +48,24 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
   const avatarStyle = useAnimatedStyle(() => {
     const size = interpolate(
       translationY.value,
-      [0, COVER_HEIGHT_SMALL],
+      [0, HEADER_HEIGHT_SMALL],
       [AVATAR_SIZE, AVATAR_SIZE / 2],
       { extrapolateRight: Extrapolation.CLAMP, extrapolateLeft: Extrapolation.CLAMP }
     )
     return {
       height: size,
       width: size,
-      // width: 100,
-      // height: 100,
-      zIndex: translationY.value >= COVER_HEIGHT_SMALL ? 1 : 3,
+      zIndex: translationY.value >= HEADER_HEIGHT_SMALL ? 1 : 3,
       transform: [
         {
           translateY: interpolate(
             translationY.value,
-            [-50, 0, COVER_HEIGHT_SMALL, COVER_HEIGHT_SMALL + 50],
+            [-50, 0, HEADER_HEIGHT_SMALL, HEADER_HEIGHT_SMALL + 50],
             [
-              COVER_HEIGHT - AVATAR_SIZE / 2 + 50,
-              COVER_HEIGHT - AVATAR_SIZE / 2,
-              COVER_HEIGHT_SMALL,
-              COVER_HEIGHT_SMALL - 50,
+              HEADER_HEIGHT - AVATAR_SIZE / 2 + 50,
+              HEADER_HEIGHT - AVATAR_SIZE / 2,
+              HEADER_HEIGHT_SMALL,
+              HEADER_HEIGHT_SMALL - 50,
             ]
           ),
         },
@@ -77,27 +75,30 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
 
   const blurViewProps = useAnimatedProps<BlurViewProps>(() => {
     return {
-      intensity: interpolate(
-        translationY.value,
-        [COVER_HEIGHT_SMALL + AVATAR_SIZE / 2, COVER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
-        [0, 50],
-        { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
-      ),
+      intensity:
+        Platform.OS === 'web'
+          ? 0
+          : interpolate(
+              translationY.value,
+              [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+              [0, 50],
+              { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
+            ),
     }
   })
 
-  const headerStyle = useAnimatedStyle(() => {
+  const headerContentStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
         translationY.value,
-        [COVER_HEIGHT_SMALL + AVATAR_SIZE / 2, COVER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+        [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
         [0, 1]
       ),
       transform: [
         {
           translateY: interpolate(
             translationY.value,
-            [COVER_HEIGHT_SMALL + AVATAR_SIZE / 2, COVER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+            [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
             [20, 0],
             { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
           ),
@@ -106,21 +107,43 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
     }
   })
 
+  const headerOverlayStyle = useAnimatedStyle(() => {
+    return {
+      opacity:
+        Platform.OS !== 'web'
+          ? 0
+          : interpolate(
+              translationY.value,
+              [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+              [0, 0.7],
+              { extrapolateRight: Extrapolation.CLAMP }
+            ),
+    }
+  })
+
   return (
     <>
-      <Animated.View style={[styles.coverWrapper, coverStyle]}>
+      <Animated.View style={[styles.header, headerStyle]}>
         <Image alt="cover" source={IMAGES.cover} flex={1} resizeMode="cover" />
+
+        <Animated.View style={[styles.headerOverlay, { backgroundColor }, headerOverlayStyle]} />
+
         <AnimatedBlurView
           style={[styles.blurView, { paddingTop: insets.top }]}
           tint={colorMode || undefined}
           animatedProps={blurViewProps}>
-          <Animated.View style={headerStyle}>
-            <Text textAlign="center" fontWeight={800}>
-              Guillaume Martinez
-            </Text>
-            <Text textAlign="center" fontSize={12}>
-              @martinezguillaume
-            </Text>
+          <Animated.View style={headerContentStyle}>
+            <Box flexDirection="row" alignItems="center">
+              <Avatar source={IMAGES.avatar} size="md" />
+              <Box ml={2}>
+                <Text textAlign="center" fontWeight={800}>
+                  Guillaume Martinez
+                </Text>
+                <Text textAlign="center" fontSize={12}>
+                  @martinezguillaume
+                </Text>
+              </Box>
+            </Box>
           </Animated.View>
         </AnimatedBlurView>
       </Animated.View>
@@ -132,7 +155,7 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
 
       <Animated.ScrollView
         onScroll={scrollHandler}
-        scrollEventThrottle={16}
+        scrollEventThrottle={1}
         {...props}
         style={[styles.scrollView, props.style]}
         contentContainerStyle={[styles.scrollViewContent, props.contentContainerStyle]}
@@ -148,7 +171,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden',
   },
-  coverWrapper: {
+  headerOverlay: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  header: {
     position: 'absolute',
     left: 0,
     right: 0,
@@ -164,9 +190,9 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     zIndex: 4,
-    marginTop: COVER_HEIGHT_SMALL,
+    marginTop: HEADER_HEIGHT_SMALL,
   },
   scrollViewContent: {
-    paddingTop: COVER_HEIGHT - COVER_HEIGHT_SMALL + AVATAR_SIZE / 2,
+    paddingTop: HEADER_HEIGHT - HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2,
   },
 })
