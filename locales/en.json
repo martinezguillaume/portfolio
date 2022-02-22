@@ -1,6 +1,7 @@
 {
   "home": {
-    "test": "en anglais",
-    "date_title": "Developer since September 2019"
+    "developerDescription": "Developer since September 2019",
+    "locationDescription": "Paris, France",
+    "birthdayDescription": "Born August 1, 1996"
   }
 }
