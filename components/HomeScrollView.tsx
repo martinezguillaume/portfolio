@@ -1,5 +1,5 @@
 import { Avatar, Box, Image, Text, useColorMode, useColorModeValue } from 'native-base'
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { ScrollViewProps, StyleSheet, Platform } from 'react-native'
 import Animated, {
   Extrapolation,
@@ -16,9 +16,13 @@ import { IMAGES } from '~/assets'
 
 export type HomeScrollViewProps = ScrollViewProps
 
-const HEADER_HEIGHT = 200
-const HEADER_HEIGHT_SMALL = 100
+const HEADER_HEIGHT = 180
+const HEADER_HEIGHT_SMALL = 80
 const AVATAR_SIZE = 120
+const AVATAR_SIZE_SMALL = 80
+
+const HEADER_OFFSET = HEADER_HEIGHT - HEADER_HEIGHT_SMALL
+const AVATAR_OFFSET = AVATAR_SIZE - AVATAR_SIZE_SMALL
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
 
@@ -32,12 +36,20 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
     translationY.value = event.contentOffset.y
   })
 
+  const { headerHeight, smallHeaderHeight } = useMemo(
+    () => ({
+      headerHeight: HEADER_HEIGHT + insets.top,
+      smallHeaderHeight: HEADER_HEIGHT_SMALL + insets.top,
+    }),
+    [insets.top]
+  )
+
   const headerStyle = useAnimatedStyle(() => {
     return {
       height: interpolate(
         translationY.value,
-        [0, HEADER_HEIGHT_SMALL],
-        [HEADER_HEIGHT, HEADER_HEIGHT_SMALL],
+        [0, HEADER_OFFSET],
+        [headerHeight, smallHeaderHeight],
         {
           extrapolateRight: Extrapolation.CLAMP,
         }
@@ -48,24 +60,24 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
   const avatarStyle = useAnimatedStyle(() => {
     const size = interpolate(
       translationY.value,
-      [0, HEADER_HEIGHT_SMALL],
-      [AVATAR_SIZE, AVATAR_SIZE / 2],
+      [0, HEADER_OFFSET],
+      [AVATAR_SIZE, AVATAR_SIZE_SMALL],
       { extrapolateRight: Extrapolation.CLAMP, extrapolateLeft: Extrapolation.CLAMP }
     )
     return {
       height: size,
       width: size,
-      zIndex: translationY.value >= HEADER_HEIGHT_SMALL ? 1 : 3,
+      zIndex: translationY.value >= HEADER_OFFSET ? 1 : 3,
       transform: [
         {
           translateY: interpolate(
             translationY.value,
-            [-50, 0, HEADER_HEIGHT_SMALL, HEADER_HEIGHT_SMALL + 50],
+            [-1, 0, HEADER_OFFSET, HEADER_OFFSET + 1],
             [
-              HEADER_HEIGHT - AVATAR_SIZE / 2 + 50,
-              HEADER_HEIGHT - AVATAR_SIZE / 2,
-              HEADER_HEIGHT_SMALL,
-              HEADER_HEIGHT_SMALL - 50,
+              headerHeight - AVATAR_OFFSET + 1,
+              headerHeight - AVATAR_OFFSET,
+              smallHeaderHeight,
+              smallHeaderHeight - 1,
             ]
           ),
         },
@@ -80,7 +92,7 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
           ? 0
           : interpolate(
               translationY.value,
-              [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+              [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
               [0, 50],
               { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
             ),
@@ -91,14 +103,14 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
     return {
       opacity: interpolate(
         translationY.value,
-        [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+        [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
         [0, 1]
       ),
       transform: [
         {
           translateY: interpolate(
             translationY.value,
-            [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+            [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
             [20, 0],
             { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
           ),
@@ -114,7 +126,7 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
           ? 0
           : interpolate(
               translationY.value,
-              [HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2, HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2 + 20],
+              [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
               [0, 0.7],
               { extrapolateRight: Extrapolation.CLAMP }
             ),
@@ -157,8 +169,11 @@ export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
         onScroll={scrollHandler}
         scrollEventThrottle={1}
         {...props}
-        style={[styles.scrollView, props.style]}
-        contentContainerStyle={[styles.scrollViewContent, props.contentContainerStyle]}
+        style={[styles.scrollView, { marginTop: smallHeaderHeight }, props.style]}
+        contentContainerStyle={[
+          { paddingTop: HEADER_OFFSET + AVATAR_SIZE - AVATAR_OFFSET },
+          props.contentContainerStyle,
+        ]}
       />
     </>
   )
@@ -190,9 +205,5 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     zIndex: 4,
-    marginTop: HEADER_HEIGHT_SMALL,
-  },
-  scrollViewContent: {
-    paddingTop: HEADER_HEIGHT - HEADER_HEIGHT_SMALL + AVATAR_SIZE / 2,
   },
 })
