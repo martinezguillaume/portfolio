@@ -26,7 +26,7 @@ const AVATAR_OFFSET = AVATAR_SIZE - AVATAR_SIZE_SMALL
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
 
-export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props }) => {
+export const HomeScrollView = memo<HomeScrollViewProps>((props) => {
   const { colorMode } = useColorMode()
   const insets = useSafeAreaInsets()
   const backgroundColor = useColorModeValue('white', 'black')
@@ -36,13 +36,23 @@ export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props })
     translationY.value = event.contentOffset.y
   })
 
+  const { headerHeight, smallHeaderHeight } = useMemo(
+    () => ({
+      headerHeight: HEADER_HEIGHT + insets.top,
+      smallHeaderHeight: HEADER_HEIGHT_SMALL + insets.top,
+    }),
+    [insets.top]
+  )
+
   const headerStyle = useAnimatedStyle(() => {
     return {
       height: interpolate(
         translationY.value,
         [0, HEADER_OFFSET],
-        [insets.top + HEADER_HEIGHT, insets.top + HEADER_HEIGHT_SMALL],
-        { extrapolateRight: Extrapolation.CLAMP }
+        [headerHeight, smallHeaderHeight],
+        {
+          extrapolateRight: Extrapolation.CLAMP,
+        }
       ),
     }
   })
@@ -57,21 +67,32 @@ export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props })
     return {
       height: size,
       width: size,
-      marginTop: interpolate(translationY.value, [0, HEADER_OFFSET], [0, AVATAR_OFFSET], {
-        extrapolateLeft: Extrapolation.CLAMP,
-        extrapolateRight: Extrapolation.CLAMP,
-      }),
+      zIndex: translationY.value >= HEADER_OFFSET ? 1 : 3,
+      transform: [
+        {
+          translateY: interpolate(
+            translationY.value,
+            [-1, 0, HEADER_OFFSET, HEADER_OFFSET + 1],
+            [
+              headerHeight - AVATAR_OFFSET + 1,
+              headerHeight - AVATAR_OFFSET,
+              smallHeaderHeight,
+              smallHeaderHeight - 1,
+            ]
+          ),
+        },
+      ],
     }
   })
 
   const blurViewProps = useAnimatedProps<BlurViewProps>(() => {
     return {
       intensity:
-        Platform.OS !== 'ios'
+        Platform.OS === 'web'
           ? 0
           : interpolate(
               translationY.value,
-              [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 50],
+              [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
               [0, 50],
               { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
             ),
@@ -82,15 +103,15 @@ export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props })
     return {
       opacity: interpolate(
         translationY.value,
-        [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 50],
+        [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
         [0, 1]
       ),
       transform: [
         {
           translateY: interpolate(
             translationY.value,
-            [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 50],
-            [50, 0],
+            [HEADER_OFFSET + AVATAR_SIZE_SMALL, HEADER_OFFSET + AVATAR_SIZE_SMALL + 20],
+            [20, 0],
             { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
           ),
         },
@@ -101,7 +122,7 @@ export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props })
   const headerOverlayStyle = useAnimatedStyle(() => {
     return {
       opacity:
-        Platform.OS === 'ios'
+        Platform.OS !== 'web'
           ? 0
           : interpolate(
               translationY.value,
@@ -125,12 +146,7 @@ export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props })
           animatedProps={blurViewProps}>
           <Animated.View style={headerContentStyle}>
             <Box flexDirection="row" alignItems="center">
-              <Avatar
-                source={IMAGES.avatar}
-                size="md"
-                borderWidth={2}
-                borderColor={backgroundColor}
-              />
+              <Avatar source={IMAGES.avatar} size="md" />
               <Box ml={2}>
                 <Text textAlign="center" fontWeight={800}>
                   Guillaume Martinez
@@ -144,21 +160,21 @@ export const HomeScrollView = memo<HomeScrollViewProps>(({ children, ...props })
         </AnimatedBlurView>
       </Animated.View>
 
+      <Animated.Image
+        source={IMAGES.avatar}
+        style={[styles.avatar, { borderColor: backgroundColor }, avatarStyle]}
+      />
+
       <Animated.ScrollView
         onScroll={scrollHandler}
         scrollEventThrottle={1}
         {...props}
-        style={[{ marginTop: insets.top + HEADER_HEIGHT_SMALL }, props.style]}
+        style={[styles.scrollView, { marginTop: smallHeaderHeight }, props.style]}
         contentContainerStyle={[
-          { paddingTop: HEADER_OFFSET + (AVATAR_SIZE - AVATAR_OFFSET) },
+          { paddingTop: HEADER_OFFSET + AVATAR_SIZE - AVATAR_OFFSET },
           props.contentContainerStyle,
-        ]}>
-        <Animated.Image
-          source={IMAGES.avatar}
-          style={[styles.avatar, { borderColor: backgroundColor }, avatarStyle]}
-        />
-        {children}
-      </Animated.ScrollView>
+        ]}
+      />
     </>
   )
 })
@@ -178,12 +194,16 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     width: '100%',
+    zIndex: 2,
   },
   avatar: {
+    top: 0,
+    left: 16,
     borderRadius: AVATAR_SIZE,
     position: 'absolute',
-    top: HEADER_OFFSET - AVATAR_OFFSET,
-    left: 16,
     borderWidth: 4,
+  },
+  scrollView: {
+    zIndex: 4,
   },
 })
