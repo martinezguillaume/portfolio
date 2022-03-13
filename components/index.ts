@@ -1,1 +1,1 @@
-export * from './HomeScrollView'
+export * from './Header'
