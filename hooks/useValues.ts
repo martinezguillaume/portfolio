@@ -18,6 +18,7 @@ export const useValues = () => {
       headerOffset: COVER_HEIGHT - COVER_HEIGHT_SMALL,
       avatarOffset: AVATAR_SIZE - AVATAR_SIZE_SMALL,
       tabBarHeight: 48,
+      insets,
     }),
     [insets]
   )

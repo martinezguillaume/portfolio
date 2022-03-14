@@ -1,4 +1,4 @@
-import { Box, Text, useColorModeValue, useToken } from 'native-base'
+import { Box, Text, useToken } from 'native-base'
 import { ReactElement, ReactNode, useCallback, useState } from 'react'
 import { Dimensions, ScrollViewProps, StyleSheet } from 'react-native'
 import Animated, {
@@ -46,9 +46,8 @@ export const TabView = <T extends Route>({
 }: TabViewProps<T>): ReactElement => {
   const primary = useToken('colors', 'primary')
   const muted = useToken('colors', 'muted')
-  const backgroundColor = useColorModeValue('white', 'black')
 
-  const { smallCoverHeight } = useValues()
+  const { smallCoverHeight, insets } = useValues()
   const [index, setIndex] = useState(0)
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
@@ -82,7 +81,7 @@ export const TabView = <T extends Route>({
       <Animated.View style={tabBarStyle}>
         <RNTabBar
           {...tabBarProps}
-          style={[styles.tabBar, { borderColor: muted['800'], backgroundColor }]}
+          style={[styles.tabBar, { borderColor: muted['800'] }]}
           indicatorStyle={{ backgroundColor: primary['500'] }}
           renderLabel={({ focused, route }) => (
             <Box flexDirection="row" alignItems="center">
@@ -94,7 +93,7 @@ export const TabView = <T extends Route>({
         />
       </Animated.View>
     ),
-    [backgroundColor, muted, primary, tabBarStyle]
+    [muted, primary, tabBarStyle]
   )
 
   const renderScene = useCallback<RNTabViewProps<T>['renderScene']>(
@@ -102,12 +101,12 @@ export const TabView = <T extends Route>({
       renderSceneProps({
         ...sceneProps,
         listProps: {
-          contentContainerStyle: { paddingTop },
+          contentContainerStyle: { paddingTop, paddingBottom: insets.bottom },
           scrollEventThrottle: 1,
           onScroll: scrollHandler,
         },
       }),
-    [paddingTop, renderSceneProps, scrollHandler]
+    [insets.bottom, paddingTop, renderSceneProps, scrollHandler]
   )
 
   return (
@@ -124,8 +123,8 @@ export const TabView = <T extends Route>({
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: undefined,
     borderBottomWidth: 1,
     elevation: 0,
+    backgroundColor: 'transparent',
   },
 })

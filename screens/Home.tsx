@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Box, Fab, useColorMode } from 'native-base'
+import { Box, Divider, Fab, useColorMode } from 'native-base'
 import { FC, useCallback, useState } from 'react'
-import { LayoutChangeEvent, StyleSheet } from 'react-native'
+import { Dimensions, LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { Route } from 'react-native-tab-view'
 
 import { Header, ListItem, TabView, TabViewProps } from '~/components'
-import { data } from '~/data'
+import { data, DataItem } from '~/data'
 import { RootStackParamList } from '~/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
@@ -21,39 +21,40 @@ export const HomeScreen: FC<Props> = () => {
   }, [])
 
   const [routes] = useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
+    { key: 'projects', title: 'Projects' },
+    { key: 'experiences', title: 'Experiences' },
   ])
 
+  const getDataKey = useCallback((item: DataItem) => item.id.toString(), [])
+  const renderData = useCallback<ListRenderItem<DataItem>>(
+    ({ item }) => <ListItem data={item} />,
+    []
+  )
   const renderScene = useCallback<TabViewProps<Route>['renderScene']>(
     ({ route, listProps }) => {
-      if (route.key === 'first') {
-        return (
-          <Animated.FlatList
-            {...listProps}
-            data={data.experiences}
-            renderItem={({ item }) => <ListItem data={item} />}
-          />
-        )
-      }
-      if (route.key === 'second') {
-        return (
-          <Animated.FlatList
-            {...listProps}
-            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]}
-            contentContainerStyle={{ paddingTop: headerHeight }}
-            renderItem={() => (
-              <Box height={50} bg="amber.300" borderColor="blue.100" borderWidth={1} />
-            )}
-          />
-        )
-      }
+      return (
+        <Animated.FlatList
+          {...listProps}
+          keyExtractor={getDataKey}
+          data={route.key === 'experiences' ? data.experiences : data.projects}
+          renderItem={renderData}
+          ItemSeparatorComponent={Divider}
+        />
+      )
     },
-    [headerHeight]
+    [getDataKey, renderData]
   )
 
   return (
-    <Box maxW={600} height="100%">
+    <Box
+      flex={1}
+      _web={{
+        minW: 600,
+        alignSelf: 'center',
+        borderRightWidth: 1,
+        borderLeftWidth: 1,
+        borderColor: 'muted.800',
+      }}>
       <Header scrollY={scrollY} onLayout={onHeaderLayout} />
 
       <TabView

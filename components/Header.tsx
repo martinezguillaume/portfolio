@@ -26,6 +26,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
   const { colorMode } = useColorMode()
   const insets = useSafeAreaInsets()
   const backgroundColor = useColorModeValue('white', 'black')
+
   const { headerOffset, coverHeight, smallCoverHeight, avatarSize, smallAvatarSize, avatarOffset } =
     useValues()
 
@@ -146,8 +147,9 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
               <Avatar
                 source={IMAGES.avatar}
                 size="md"
-                borderWidth={2}
-                borderColor={backgroundColor}
+                borderWidth={1}
+                _light={{ borderColor: 'black' }}
+                _dark={{ borderColor: 'white' }}
               />
               <Box ml={2}>
                 <Text textAlign="center" fontWeight={800}>
@@ -197,6 +199,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
+    paddingHorizontal: 16,
   },
   blurView: {
     ...StyleSheet.absoluteFillObject,
