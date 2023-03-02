@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Box, Divider, Fab, useColorMode } from 'native-base'
 import { FC, useCallback, useState } from 'react'
-import { Dimensions, LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
+import { FlatList, LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { Route } from 'react-native-tab-view'
 
@@ -10,6 +10,7 @@ import { data, DataItem } from '~/data'
 import { RootStackParamList } from '~/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 export const HomeScreen: FC<Props> = () => {
   const { toggleColorMode } = useColorMode()
@@ -35,6 +36,7 @@ export const HomeScreen: FC<Props> = () => {
       return (
         <Animated.FlatList
           {...listProps}
+          ref={console.log}
           keyExtractor={getDataKey}
           data={route.key === 'experiences' ? data.experiences : data.projects}
           renderItem={renderData}

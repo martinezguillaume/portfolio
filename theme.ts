@@ -9,7 +9,12 @@ export const theme = extendTheme({
     },
     Divider: {
       baseStyle: {
-        backgroundColor: 'muted.800',
+        _dark: {
+          backgroundColor: 'muted.800',
+        },
+        _light: {
+          backgroundColor: 'muted.300',
+        },
       },
     },
   },

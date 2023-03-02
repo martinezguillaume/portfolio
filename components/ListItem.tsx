@@ -44,7 +44,14 @@ export const ListItem = memo<ListItemProps>(
     data: { title, subtitle, avatar, location, startDate, endDate, description, pictures, skills },
   }) => {
     return (
-      <Row px={4} py={2} space={2}>
+      <Row
+        px={4}
+        py={2}
+        space={2}
+        // maxW={600}
+        _web={{ borderLeftWidth: 1, borderRightWidth: 1 }}
+        _dark={{ borderColor: 'muted.800' }}
+        _light={{ borderColor: 'muted.300' }}>
         <Avatar source={typeof avatar === 'string' ? { uri: avatar } : avatar} />
 
         <Column flex={1} space={2}>

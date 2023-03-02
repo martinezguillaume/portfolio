@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Dimensions, Platform } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export const COVER_HEIGHT = 180
@@ -19,6 +20,7 @@ export const useValues = () => {
       avatarOffset: AVATAR_SIZE - AVATAR_SIZE_SMALL,
       tabBarHeight: 48,
       insets,
+      appWidth: Platform.OS === 'web' ? 600 : Dimensions.get('window').width,
     }),
     [insets]
   )

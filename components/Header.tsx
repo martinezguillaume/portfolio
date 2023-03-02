@@ -108,7 +108,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
     }
   })
 
-  const data = useMemo<{ description?: string; icon: string; link?: boolean }[]>(
+  const data = useMemo<{ description?: string; icon: string; link?: string }[]>(
     () => [
       {
         icon: 'map-pin',
@@ -119,9 +119,9 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
         description: t('home.birthdayDescription'),
       },
       {
-        icon: 'link',
-        link: true,
-        description: 'martinezguillaume.github.com',
+        icon: 'github',
+        link: 'github.com/martinezguillaume/portfolio',
+        description: 'github.com',
       },
       {
         icon: 'calendar',
@@ -133,7 +133,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
 
   return (
     <>
-      <Animated.View style={[styles.cover, coverStyle]}>
+      <Animated.View pointerEvents="none" style={[styles.cover, coverStyle]}>
         <Image alt="cover" source={IMAGES.cover} flex={1} resizeMode="cover" />
 
         <Animated.View style={[styles.coverOverlay, { backgroundColor }, coverOverlayStyle]} />
@@ -165,6 +165,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
       </Animated.View>
 
       <Animated.View
+        pointerEvents="none"
         onLayout={onLayout}
         style={[
           styles.header,
@@ -186,8 +187,13 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
 
         <Row flexDirection="row" flexWrap="wrap" mt={2} space={2}>
           {data.map((item) => (
-            <Text key={item.icon} fontSize={12} ml={1} mt={2} color="muted.500">
-              <Icon color="muted.500" size="4" as={Feather} name={item.icon} /> {item.description}
+            <Text
+              color={item.link ? 'blue.500' : 'muted.500'}
+              key={item.icon}
+              fontSize={12}
+              ml={1}
+              mt={2}>
+              <Icon color="muted.500" size={4} as={Feather} name={item.icon} /> {item.description}
             </Text>
           ))}
         </Row>
@@ -199,7 +205,11 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
+    left: 0,
+    right: 0,
     paddingHorizontal: 16,
+    maxWidth: 600,
+    marginHorizontal: 'auto',
   },
   blurView: {
     ...StyleSheet.absoluteFillObject,
@@ -214,7 +224,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    width: '100%',
+    maxWidth: 600,
+    marginHorizontal: 'auto',
     zIndex: 5,
   },
   avatar: {
