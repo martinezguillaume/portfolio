@@ -17,6 +17,16 @@ export const theme = extendTheme({
         },
       },
     },
+    Box: {
+      baseStyle: {
+        _dark: {
+          borderColor: 'muted.800',
+        },
+        _light: {
+          borderColor: 'muted.300',
+        },
+      },
+    },
   },
 })
 

@@ -1,21 +1,22 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Box, Divider, Fab, useColorMode } from 'native-base'
 import { FC, useCallback, useState } from 'react'
-import { FlatList, LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
+import { LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { Route } from 'react-native-tab-view'
 
 import { Header, ListItem, TabView, TabViewProps } from '~/components'
 import { data, DataItem } from '~/data'
+import { useValues } from '~/hooks'
 import { RootStackParamList } from '~/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 export const HomeScreen: FC<Props> = () => {
   const { toggleColorMode } = useColorMode()
   const scrollY = useSharedValue(0)
   const [headerHeight, setHeaderHeight] = useState(0)
+  const { appWidth } = useValues()
 
   const onHeaderLayout = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
     setHeaderHeight(nativeEvent.layout.height)
@@ -36,7 +37,6 @@ export const HomeScreen: FC<Props> = () => {
       return (
         <Animated.FlatList
           {...listProps}
-          ref={console.log}
           keyExtractor={getDataKey}
           data={route.key === 'experiences' ? data.experiences : data.projects}
           renderItem={renderData}
@@ -51,11 +51,10 @@ export const HomeScreen: FC<Props> = () => {
     <Box
       flex={1}
       _web={{
-        minW: 600,
+        minW: appWidth,
         alignSelf: 'center',
         borderRightWidth: 1,
         borderLeftWidth: 1,
-        borderColor: 'muted.800',
       }}>
       <Header scrollY={scrollY} onLayout={onHeaderLayout} />
 

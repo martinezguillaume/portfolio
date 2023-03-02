@@ -1,7 +1,7 @@
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(true)
   return {
-    presets: ["babel-preset-expo"],
+    presets: ['babel-preset-expo'],
     plugins: [
       [
         'module-resolver',
@@ -9,11 +9,11 @@ module.exports = function (api) {
           root: ['.'],
           alias: {
             '^~/(.+)': './\\1',
-            "@native-base/icons": "@native-base/icons/lib",
+            '@native-base/icons': '@native-base/icons/lib',
           },
         },
       ],
-      "react-native-reanimated/plugin"
+      'react-native-reanimated/plugin',
     ],
-  };
-};
+  }
+}

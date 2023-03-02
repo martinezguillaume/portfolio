@@ -7,7 +7,7 @@ import { RootNavigator } from './RootNavigator'
 
 export const Navigation = () => {
   const { colorMode } = useColorMode()
-  const backgroundColor = useColorModeValue('white', 'black')
+  const backgroundColor = useColorModeValue('rgb(242, 242, 242)', 'black')
 
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(backgroundColor)
