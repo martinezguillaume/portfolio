@@ -9,6 +9,18 @@ export type ListItemProps = {
 }
 
 const skillIcon: Record<DataSkill, IIconProps> = {
+  react: {
+    as: MaterialCommunityIcons,
+    name: 'react',
+  },
+  aws: {
+    as: MaterialCommunityIcons,
+    name: 'aws',
+  },
+  nodejs: {
+    as: MaterialCommunityIcons,
+    name: 'nodejs',
+  },
   html: {
     as: MaterialCommunityIcons,
     name: 'language-html5',
