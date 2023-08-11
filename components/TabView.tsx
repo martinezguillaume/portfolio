@@ -1,7 +1,7 @@
 import { DefaultTheme } from '@react-navigation/native'
 import { Box, Divider, Text, useToken } from 'native-base'
 import { LegacyRef, ReactElement, ReactNode, useCallback, useRef, useState } from 'react'
-import { Dimensions, Platform, StyleSheet } from 'react-native'
+import { Dimensions, FlatList, Platform, ScrollViewProps, StyleSheet } from 'react-native'
 import Animated, {
   Extrapolate,
   interpolate,
@@ -18,6 +18,7 @@ import {
   TabBar as RNTabBar,
 } from 'react-native-tab-view'
 
+import { DataItem } from '~/data'
 import { useValues } from '~/hooks'
 
 const initialLayout = { width: Dimensions.get('window').width }
@@ -31,9 +32,7 @@ export type TabViewProps<T extends Route> = Omit<
   renderScene: (
     props: SceneRendererProps & {
       route: T
-      listProps: Partial<Animated.FlatList<any>['props']> & {
-        ref?: LegacyRef<Animated.FlatList<any>>
-      }
+      listProps: Partial<ScrollViewProps> & { ref: LegacyRef<Animated.FlatList<DataItem>> }
     }
   ) => ReactNode
   scrollY: SharedValue<number>
@@ -53,7 +52,7 @@ export const TabView = <T extends Route>({
   const { smallCoverHeight, insets, tabBarHeight, appWidth } = useValues()
   const [index, setIndex] = useState(0)
 
-  const listRef = useRef<{ key: string; value: Animated.FlatList<any> }[]>([])
+  const listRef = useRef<{ key: string; value: Animated.FlatList<DataItem> }[]>([])
   const listOffset = useRef<Record<string, number>>({})
   const scrollHandler = useAnimatedScrollHandler((event) => {
     const y = event.contentOffset.y
@@ -61,12 +60,14 @@ export const TabView = <T extends Route>({
     const curRoute = routes[index].key
     listOffset.current[curRoute] = y
   })
-  const syncScrollOffset = () => {
+  const syncScrollOffset = useCallback(() => {
     const curRouteKey = routes[index].key
     listRef.current.forEach((item) => {
       if (item.key !== curRouteKey) {
         if (scrollY.value < paddingTop && scrollY.value >= 0) {
           if (item.value) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore issue: https://github.com/software-mansion/react-native-reanimated/issues/3023
             item.value.scrollToOffset({
               offset: scrollY.value,
               animated: false,
@@ -76,6 +77,8 @@ export const TabView = <T extends Route>({
         } else if (scrollY.value >= paddingTop) {
           if (listOffset.current[item.key] < paddingTop || listOffset.current[item.key] == null) {
             if (item.value) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore issue: https://github.com/software-mansion/react-native-reanimated/issues/3023
               item.value.scrollToOffset({
                 offset: paddingTop,
                 animated: false,
@@ -86,7 +89,7 @@ export const TabView = <T extends Route>({
         }
       }
     })
-  }
+  }, [index, paddingTop, routes, scrollY.value])
 
   const tabBarStyle = useAnimatedStyle(() => {
     return {
@@ -146,12 +149,12 @@ export const TabView = <T extends Route>({
       renderSceneProps({
         ...sceneProps,
         listProps: {
+          showsVerticalScrollIndicator: false,
           contentContainerStyle: {
             paddingTop: paddingTop + tabBarHeight,
             paddingBottom: insets.bottom,
           },
-
-          scrollEventThrottle: 1,
+          scrollEventThrottle: 16,
           onScroll: scrollHandler,
           onMomentumScrollEnd: syncScrollOffset,
           onScrollEndDrag: syncScrollOffset,
@@ -178,6 +181,7 @@ export const TabView = <T extends Route>({
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
+      onSwipeStart={syncScrollOffset}
       {...props}
     />
   )

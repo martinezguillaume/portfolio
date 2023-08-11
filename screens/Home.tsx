@@ -1,9 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Box, Divider, Fab, useColorMode } from 'native-base'
+import { Box, Divider, Fab, Icon, useColorMode } from 'native-base'
 import { FC, useCallback, useState } from 'react'
 import { LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { Route } from 'react-native-tab-view'
+import { Feather } from '@native-base/icons'
 
 import { Header, ListItem, TabView, TabViewProps } from '~/components'
 import { data, DataItem } from '~/data'
@@ -51,7 +52,7 @@ export const HomeScreen: FC<Props> = () => {
     <Box
       flex={1}
       _web={{
-        minW: appWidth,
+        width: appWidth,
         alignSelf: 'center',
         borderRightWidth: 1,
         borderLeftWidth: 1,
@@ -66,7 +67,10 @@ export const HomeScreen: FC<Props> = () => {
         paddingTop={headerHeight}
       />
 
-      <Fab onPress={toggleColorMode} />
+      <Fab
+        onPress={toggleColorMode}
+        icon={<Icon _dark={{ name: 'sun' }} _light={{ name: 'moon' }} as={Feather} />}
+      />
     </Box>
   )
 }

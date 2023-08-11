@@ -208,8 +208,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     paddingHorizontal: 16,
-    maxWidth: 600,
-    marginHorizontal: 'auto',
   },
   blurView: {
     ...StyleSheet.absoluteFillObject,
@@ -224,8 +222,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    maxWidth: 600,
-    marginHorizontal: 'auto',
     zIndex: 5,
   },
   avatar: {
