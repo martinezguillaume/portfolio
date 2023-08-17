@@ -38,7 +38,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       startDate: dayjs().set('month', 2).set('year', 2022),
       endDate: dayjs(),
       description:
-        "Maintenance de l'application mobile\nAjouts de fonctionnalités\nMises à jour régulière des librairies dépendantes\nBugfix et optimisations diverses\nCI et automatisation de deploiements",
+        "Maintenance de l'application mobile\nAjouts de fonctionnalités\nMises à jour régulière des librairies dépendantes\nBugfix et optimisations diverses\nCI et automatisation de déploiements",
       pictures: [require('~/assets/images/elium-4.jpeg')],
     },
     {

@@ -1,7 +1,9 @@
 import { DefaultTheme } from '@react-navigation/native'
 import { Box, Divider, Text, useToken } from 'native-base'
 import { LegacyRef, ReactElement, ReactNode, useCallback, useRef, useState } from 'react'
-import { Dimensions, FlatList, Platform, ScrollViewProps, StyleSheet } from 'react-native'
+import { Dimensions, Platform, ScrollViewProps, StyleSheet } from 'react-native'
+// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
+// eslint-disable-next-line import/default
 import Animated, {
   Extrapolate,
   interpolate,

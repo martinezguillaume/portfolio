@@ -2,11 +2,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Box, Divider, Fab, Icon, useColorMode } from 'native-base'
 import { FC, useCallback, useState } from 'react'
 import { LayoutChangeEvent, ListRenderItem, StyleSheet } from 'react-native'
+// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
+// eslint-disable-next-line import/default
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { Route } from 'react-native-tab-view'
 import { Feather } from '@native-base/icons'
 
-import { Header, ListItem, TabView, TabViewProps } from '~/components'
+import { Header, LocaleFab, ListItem, TabView, TabViewProps } from '~/components'
 import { data, DataItem } from '~/data'
 import { useValues } from '~/hooks'
 import { RootStackParamList } from '~/types'
@@ -67,7 +69,9 @@ export const HomeScreen: FC<Props> = () => {
         paddingTop={headerHeight}
       />
 
+      <LocaleFab />
       <Fab
+        right={20}
         onPress={toggleColorMode}
         icon={<Icon _dark={{ name: 'sun' }} _light={{ name: 'moon' }} as={Feather} />}
       />

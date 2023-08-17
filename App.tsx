@@ -1,31 +1,14 @@
 import { INativebaseConfig, NativeBaseProvider, StorageManager } from 'native-base'
 import { StyleSheet, View } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import i18n from 'i18n-js'
-import * as Localization from 'expo-localization'
 import * as Font from 'expo-font'
 import { Feather, MaterialCommunityIcons } from '@native-base/icons'
-import { useCallback, useEffect, useState } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
-import dayjs from 'dayjs'
-import 'dayjs/locale/fr'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Navigation } from './navigation'
-import en from './locales/en.json'
-import fr from './locales/fr.json'
 import { theme } from './theme'
-
-// Localization config
-const locale = Localization.locale.substring(0, 2)
-/* eslint-disable import/no-named-as-default-member */
-dayjs.locale(locale)
-i18n.translations = {
-  en,
-  fr,
-}
-i18n.locale = locale
-i18n.fallbacks = 'en'
-/* eslint-enable import/no-named-as-default-member */
+import { useAppStore } from './store'
 
 // Native Base config
 const colorModeManager: StorageManager = {
@@ -57,6 +40,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
+  const locale = useAppStore((state) => state.locale)
 
   useEffect(() => {
     async function prepare() {
@@ -98,7 +82,7 @@ export default function App() {
   return (
     <View style={styles.flex} onLayout={onLayoutRootView}>
       <NativeBaseProvider colorModeManager={colorModeManager} config={config}>
-        <Navigation />
+        <Navigation key={locale} />
       </NativeBaseProvider>
     </View>
   )

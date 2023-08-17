@@ -1,6 +1,8 @@
 import { Avatar, Box, Icon, Image, Row, Text, useColorMode, useColorModeValue } from 'native-base'
 import { memo, useMemo } from 'react'
 import { StyleSheet, Platform, LayoutChangeEvent } from 'react-native'
+// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
+// eslint-disable-next-line import/default
 import Animated, {
   Extrapolation,
   interpolate,
@@ -9,9 +11,9 @@ import Animated, {
 } from 'react-native-reanimated'
 import { BlurView, BlurViewProps } from 'expo-blur'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { t } from 'i18n-js'
 import { Feather } from '@native-base/icons'
 
+import { i18n } from '~/i18n'
 import { IMAGES } from '~/assets'
 import { useValues } from '~/hooks'
 
@@ -112,11 +114,11 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
     () => [
       {
         icon: 'map-pin',
-        description: t('home.locationDescription'),
+        description: i18n.t('home.locationDescription'),
       },
       {
         icon: 'gift',
-        description: t('home.birthdayDescription'),
+        description: i18n.t('home.birthdayDescription'),
       },
       {
         icon: 'github',
@@ -125,7 +127,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
       },
       {
         icon: 'calendar',
-        description: t('home.developerDescription'),
+        description: i18n.t('home.developerDescription'),
       },
     ],
     []
@@ -156,7 +158,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
                   Guillaume Martinez
                 </Text>
                 <Text textAlign="center" fontSize={12}>
-                  {t('home.title')}
+                  {i18n.t('home.title')}
                 </Text>
               </Box>
             </Box>
@@ -181,9 +183,9 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
         <Text fontSize={16} fontWeight={800}>
           Guillaume Martinez
         </Text>
-        <Text color="muted.500">{t('home.title')}</Text>
+        <Text color="muted.500">{i18n.t('home.title')}</Text>
 
-        <Text mt={4}>{t('home.description')}</Text>
+        <Text mt={4}>{i18n.t('home.description')}</Text>
 
         <Row flexDirection="row" flexWrap="wrap" mt={2} space={2}>
           {data.map((item) => (
