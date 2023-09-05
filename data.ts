@@ -124,7 +124,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       id: 8,
       avatar: IMAGES.elium,
       startDate: dayjs().set('month', 2).set('year', 2022),
-      endDate: dayjs(),
+      endDate: dayjs().set('month', 8).set('year', 2023),
       title: 'Elium',
       subtitle: 'Développeur React Native',
       description:
@@ -140,7 +140,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       id: 7,
       avatar: IMAGES.faks,
       startDate: dayjs().set('month', 6).set('year', 2021),
-      endDate: dayjs(),
+      endDate: dayjs().set('month', 7).set('year', 2023),
       title: 'Faks',
       subtitle: 'Développeur React Native',
       description:
