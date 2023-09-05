@@ -4,6 +4,9 @@
     "developerDescription": "Freelance depuis septembre 2019",
     "locationDescription": "Paris, France",
     "birthdayDescription": "Né le 1 août 1996",
-    "title": "Développeur Javascript"
+    "title": "Développeur Javascript",
+    "projects": "Projets",
+    "experiences": "Expériences",
+    "language": "Langue"
   }
 }

@@ -12,6 +12,7 @@ import { Header, LocaleFab, ListItem, TabView, TabViewProps } from '~/components
 import { data, DataItem } from '~/data'
 import { useValues } from '~/hooks'
 import { RootStackParamList } from '~/types'
+import { i18n } from '~/i18n'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 
@@ -26,8 +27,8 @@ export const HomeScreen: FC<Props> = () => {
   }, [])
 
   const [routes] = useState([
-    { key: 'projects', title: 'Projects' },
-    { key: 'experiences', title: 'Experiences' },
+    { key: 'projects', title: i18n.t('home.projects') },
+    { key: 'experiences', title: i18n.t('home.experiences') },
   ])
 
   const getDataKey = useCallback((item: DataItem) => item.id.toString(), [])
