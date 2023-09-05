@@ -40,6 +40,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       description:
         "Maintenance de l'application mobile\nAjouts de fonctionnalités\nMises à jour régulière des librairies dépendantes\nBugfix et optimisations diverses\nCI et automatisation de déploiements",
       pictures: [require('~/assets/images/elium-4.jpeg')],
+      skills: ['react', 'ts', 'graphql'],
     },
     {
       id: 6,
@@ -52,6 +53,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       description:
         'Refactorisation du projet React-Native sous typescript\nMise en place de tests typescript / jest / e2e (detox)\nMise en place de CI\nAjouts de fonctionnalités pour l’application mobile',
       pictures: [require('~/assets/images/faks-4.png')],
+      skills: ['react', 'ts'],
     },
     {
       id: 5,
@@ -63,6 +65,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: dayjs().set('month', 5).set('year', 2021),
       description:
         'Développement de multiples applications mobiles et applications web en react et react-native.\nCréation UI & UX pour certains projets.',
+      skills: ['react', 'ts', 'graphql', 'nodejs', 'aws'],
     },
     {
       id: 4,
@@ -75,6 +78,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       description:
         'Développement de multiples applications mobiles et applications web en react et react-native.\nCréation UI & UX pour certains projets.',
       pictures: [require('~/assets/images/totem-1.jpeg')],
+      skills: ['react', 'ts', 'graphql', 'nodejs', 'aws'],
     },
     {
       id: 3,
@@ -86,6 +90,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: dayjs().set('month', 8).set('year', 2017),
       description:
         "Élaboration de l'application mobile en react-native ainsi que l'application web en react.",
+      skills: ['react'],
     },
     {
       id: 2,
