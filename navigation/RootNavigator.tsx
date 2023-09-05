@@ -7,6 +7,10 @@ const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 export const RootNavigator = () => (
   <RootStack.Navigator screenOptions={{ headerShown: false }}>
-    <RootStack.Screen name="Home" component={HomeScreen} />
+    <RootStack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{ title: 'Guillaume Martinez - Portfolio' }}
+    />
   </RootStack.Navigator>
 )
