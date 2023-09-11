@@ -1,18 +1,20 @@
-import { create } from 'zustand'
+import {create} from 'zustand'
 import * as dayjs from 'dayjs'
 import * as Localization from 'expo-localization'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import {persist, createJSONStorage} from 'zustand/middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import 'dayjs/locale/fr'
 
-import { i18n } from './i18n'
+import {i18n} from './i18n'
 
 type AppState = {
   locale: 'fr' | 'en'
   setLocale: (locale: AppState['locale']) => void
 }
 
-const initialLocale: AppState['locale'] = Localization.locale.startsWith('fr') ? 'fr' : 'en'
+const initialLocale: AppState['locale'] = Localization.locale.startsWith('fr')
+  ? 'fr'
+  : 'en'
 const changeAppLanguage = (locale: AppState['locale']) => {
   dayjs.locale(locale)
   i18n.locale = locale
@@ -21,11 +23,11 @@ changeAppLanguage(initialLocale)
 
 export const useAppStore = create<AppState>()(
   persist(
-    (set) => ({
+    set => ({
       locale: initialLocale,
-      setLocale: (locale) => {
+      setLocale: locale => {
         changeAppLanguage(locale)
-        set({ locale })
+        set({locale})
       },
     }),
     {
@@ -42,6 +44,6 @@ export const useAppStore = create<AppState>()(
           }
         }
       },
-    }
-  )
+    },
+  ),
 )

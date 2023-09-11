@@ -1,17 +1,24 @@
-import { Fab, Menu } from 'native-base'
-import { FC, memo } from 'react'
+import {Fab, Menu} from 'native-base'
+import {FC, memo} from 'react'
 
-import { i18n } from '~/i18n'
-import { useAppStore } from '~/store'
+import {i18n} from '~/i18n'
+import {useAppStore} from '~/store'
 
 export const LocaleFab: FC = memo(() => {
-  const setLocale = useAppStore((state) => state.setLocale)
-  const locale = useAppStore((state) => state.locale)
+  const setLocale = useAppStore(state => state.setLocale)
+  const locale = useAppStore(state => state.locale)
 
   return (
     <Menu
       // eslint-disable-next-line react/no-unstable-nested-components
-      trigger={(triggerProps) => <Fab {...triggerProps} label={locale === 'fr' ? '🇫🇷' : '🇬🇧'} />}>
+      trigger={triggerProps => (
+        <Fab
+          height="48px"
+          width="48px"
+          {...triggerProps}
+          label={locale === 'fr' ? '🇫🇷' : '🇬🇧'}
+        />
+      )}>
       <Menu.OptionGroup
         defaultValue={locale}
         title={i18n.t('home.language')}

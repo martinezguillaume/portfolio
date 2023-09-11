@@ -1,7 +1,7 @@
-import { useBreakpointValue } from 'native-base'
-import { useMemo } from 'react'
-import { Dimensions } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import {useBreakpointValue} from 'native-base'
+import {useMemo} from 'react'
+import {Dimensions} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
 export const COVER_HEIGHT = 180
 export const COVER_HEIGHT_SMALL = 80
@@ -12,7 +12,7 @@ export const useValues = () => {
   const insets = useSafeAreaInsets()
   const appWidth = useBreakpointValue({
     base: Dimensions.get('window').width,
-    lg: 600,
+    md: 600,
   })
 
   return useMemo(
@@ -27,6 +27,6 @@ export const useValues = () => {
       insets,
       appWidth: appWidth,
     }),
-    [appWidth, insets]
+    [appWidth, insets],
   )
 }

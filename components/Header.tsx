@@ -1,6 +1,15 @@
-import { Avatar, Box, Icon, Image, Row, Text, useColorMode, useColorModeValue } from 'native-base'
-import { memo, useMemo } from 'react'
-import { StyleSheet, Platform, LayoutChangeEvent } from 'react-native'
+import {
+  Avatar,
+  Box,
+  Icon,
+  Image,
+  Row,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from 'native-base'
+import {memo, useMemo} from 'react'
+import {StyleSheet, Platform, LayoutChangeEvent} from 'react-native'
 // FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
 // eslint-disable-next-line import/default
 import Animated, {
@@ -9,13 +18,13 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated'
-import { BlurView, BlurViewProps } from 'expo-blur'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Feather } from '@native-base/icons'
+import {BlurView, BlurViewProps} from 'expo-blur'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import {Feather} from '@native-base/icons'
 
-import { i18n } from '~/i18n'
-import { IMAGES } from '~/assets'
-import { useValues } from '~/hooks'
+import {i18n} from '~/i18n'
+import {IMAGES} from '~/assets'
+import {useValues} from '~/hooks'
 
 export type HeaderProps = {
   scrollY: Animated.SharedValue<number>
@@ -24,34 +33,55 @@ export type HeaderProps = {
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
 
-export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
-  const { colorMode } = useColorMode()
+export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
+  const {colorMode} = useColorMode()
   const insets = useSafeAreaInsets()
   const backgroundColor = useColorModeValue('white', 'black')
 
-  const { headerOffset, coverHeight, smallCoverHeight, avatarSize, smallAvatarSize, avatarOffset } =
-    useValues()
+  const {
+    headerOffset,
+    coverHeight,
+    smallCoverHeight,
+    avatarSize,
+    smallAvatarSize,
+    avatarOffset,
+  } = useValues()
 
   const coverStyle = useAnimatedStyle(() => {
     return {
-      height: interpolate(scrollY.value, [0, headerOffset], [coverHeight, smallCoverHeight], {
-        extrapolateRight: Extrapolation.CLAMP,
-      }),
+      height: interpolate(
+        scrollY.value,
+        [0, headerOffset],
+        [coverHeight, smallCoverHeight],
+        {
+          extrapolateRight: Extrapolation.CLAMP,
+        },
+      ),
     }
   })
 
   const avatarStyle = useAnimatedStyle(() => {
-    const size = interpolate(scrollY.value, [0, headerOffset], [avatarSize, smallAvatarSize], {
-      extrapolateRight: Extrapolation.CLAMP,
-      extrapolateLeft: Extrapolation.CLAMP,
-    })
+    const size = interpolate(
+      scrollY.value,
+      [0, headerOffset],
+      [avatarSize, smallAvatarSize],
+      {
+        extrapolateRight: Extrapolation.CLAMP,
+        extrapolateLeft: Extrapolation.CLAMP,
+      },
+    )
     return {
       height: size,
       width: size,
-      marginTop: interpolate(scrollY.value, [0, headerOffset], [0, avatarOffset], {
-        extrapolateLeft: Extrapolation.CLAMP,
-        extrapolateRight: Extrapolation.CLAMP,
-      }),
+      marginTop: interpolate(
+        scrollY.value,
+        [0, headerOffset],
+        [0, avatarOffset],
+        {
+          extrapolateLeft: Extrapolation.CLAMP,
+          extrapolateRight: Extrapolation.CLAMP,
+        },
+      ),
     }
   })
 
@@ -62,9 +92,15 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
           ? 0
           : interpolate(
               scrollY.value,
-              [headerOffset + smallAvatarSize, headerOffset + smallAvatarSize + 50],
+              [
+                headerOffset + smallAvatarSize,
+                headerOffset + smallAvatarSize + 50,
+              ],
               [0, 50],
-              { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
+              {
+                extrapolateLeft: Extrapolation.CLAMP,
+                extrapolateRight: Extrapolation.CLAMP,
+              },
             ),
     }
   })
@@ -74,15 +110,21 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
       opacity: interpolate(
         scrollY.value,
         [headerOffset + smallAvatarSize, headerOffset + smallAvatarSize + 50],
-        [0, 1]
+        [0, 1],
       ),
       transform: [
         {
           translateY: interpolate(
             scrollY.value,
-            [headerOffset + smallAvatarSize, headerOffset + smallAvatarSize + 50],
+            [
+              headerOffset + smallAvatarSize,
+              headerOffset + smallAvatarSize + 50,
+            ],
             [50, 0],
-            { extrapolateLeft: Extrapolation.CLAMP, extrapolateRight: Extrapolation.CLAMP }
+            {
+              extrapolateLeft: Extrapolation.CLAMP,
+              extrapolateRight: Extrapolation.CLAMP,
+            },
           ),
         },
       ],
@@ -96,9 +138,12 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
           ? 0
           : interpolate(
               scrollY.value,
-              [headerOffset + smallAvatarSize, headerOffset + smallAvatarSize + 50],
+              [
+                headerOffset + smallAvatarSize,
+                headerOffset + smallAvatarSize + 50,
+              ],
               [0, 0.7],
-              { extrapolateRight: Extrapolation.CLAMP }
+              {extrapolateRight: Extrapolation.CLAMP},
             ),
     }
   })
@@ -106,11 +151,11 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
   const headerStyle = useAnimatedStyle(() => {
     return {
       zIndex: scrollY.value >= headerOffset ? 1 : 10,
-      transform: [{ translateY: -scrollY.value }],
+      transform: [{translateY: -scrollY.value}],
     }
   })
 
-  const data = useMemo<{ description?: string; icon: string; link?: string }[]>(
+  const data = useMemo<{description?: string; icon: string; link?: string}[]>(
     () => [
       {
         icon: 'map-pin',
@@ -130,18 +175,20 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
         description: i18n.t('home.developerDescription'),
       },
     ],
-    []
+    [],
   )
 
   return (
     <>
-      <Animated.View pointerEvents="none" style={[styles.cover, coverStyle]}>
+      <Animated.View style={[styles.cover, coverStyle]}>
         <Image alt="cover" source={IMAGES.cover} flex={1} resizeMode="cover" />
 
-        <Animated.View style={[styles.coverOverlay, { backgroundColor }, coverOverlayStyle]} />
+        <Animated.View
+          style={[styles.coverOverlay, {backgroundColor}, coverOverlayStyle]}
+        />
 
         <AnimatedBlurView
-          style={[styles.blurView, { paddingTop: insets.top }]}
+          style={[styles.blurView, {paddingTop: insets.top}]}
           tint={colorMode || undefined}
           animatedProps={blurViewProps}>
           <Animated.View style={coverContentStyle}>
@@ -150,8 +197,8 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
                 source={IMAGES.avatar}
                 size="md"
                 borderWidth={1}
-                _light={{ borderColor: 'black' }}
-                _dark={{ borderColor: 'white' }}
+                _light={{borderColor: 'black'}}
+                _dark={{borderColor: 'white'}}
               />
               <Box ml={2}>
                 <Text textAlign="center" fontWeight={800}>
@@ -167,7 +214,6 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
       </Animated.View>
 
       <Animated.View
-        pointerEvents="none"
         onLayout={onLayout}
         style={[
           styles.header,
@@ -178,7 +224,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
         ]}>
         <Animated.Image
           source={IMAGES.avatar}
-          style={[styles.avatar, { borderColor: backgroundColor }, avatarStyle]}
+          style={[styles.avatar, {borderColor: backgroundColor}, avatarStyle]}
         />
         <Text fontSize={16} fontWeight={800}>
           Guillaume Martinez
@@ -188,14 +234,15 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
         <Text mt={4}>{i18n.t('home.description')}</Text>
 
         <Row flexDirection="row" flexWrap="wrap" mt={2} space={2}>
-          {data.map((item) => (
+          {data.map(item => (
             <Text
               color={item.link ? 'blue.500' : 'muted.500'}
               key={item.icon}
               fontSize={12}
               ml={1}
               mt={2}>
-              <Icon color="muted.500" size={4} as={Feather} name={item.icon} /> {item.description}
+              <Icon color="muted.500" size={4} as={Feather} name={item.icon} />{' '}
+              {item.description}
             </Text>
           ))}
         </Row>
@@ -206,6 +253,7 @@ export const Header = memo<HeaderProps>(({ scrollY, onLayout }) => {
 
 const styles = StyleSheet.create({
   header: {
+    pointerEvents: 'none',
     position: 'absolute',
     left: 0,
     right: 0,
@@ -221,6 +269,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   cover: {
+    pointerEvents: 'none',
     position: 'absolute',
     left: 0,
     right: 0,

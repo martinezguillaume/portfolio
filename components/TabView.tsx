@@ -1,7 +1,14 @@
-import { DefaultTheme } from '@react-navigation/native'
-import { Box, Divider, Text, useToken } from 'native-base'
-import { LegacyRef, ReactElement, ReactNode, useCallback, useRef, useState } from 'react'
-import { Dimensions, Platform, ScrollViewProps, StyleSheet } from 'react-native'
+import {DefaultTheme} from '@react-navigation/native'
+import {Box, Divider, Text, useToken} from 'native-base'
+import {
+  ReactElement,
+  ReactNode,
+  Ref,
+  useCallback,
+  useRef,
+  useState,
+} from 'react'
+import {Dimensions, Platform, ScrollViewProps, StyleSheet} from 'react-native'
 // FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
 // eslint-disable-next-line import/default
 import Animated, {
@@ -20,10 +27,10 @@ import {
   TabBar as RNTabBar,
 } from 'react-native-tab-view'
 
-import { DataItem } from '~/data'
-import { useValues } from '~/hooks'
+import {DataItem} from '~/data'
+import {useValues} from '~/hooks'
 
-const initialLayout = { width: Dimensions.get('window').width }
+const initialLayout = {width: Dimensions.get('window').width}
 const INDICATOR_WIDTH = 100
 
 export type TabViewProps<T extends Route> = Omit<
@@ -34,8 +41,10 @@ export type TabViewProps<T extends Route> = Omit<
   renderScene: (
     props: SceneRendererProps & {
       route: T
-      listProps: Partial<ScrollViewProps> & { ref: LegacyRef<Animated.FlatList<DataItem>> }
-    }
+      listProps: Partial<ScrollViewProps> & {
+        ref: Ref<Animated.FlatList<DataItem>>
+      }
+    },
   ) => ReactNode
   scrollY: SharedValue<number>
   paddingTop: number
@@ -51,12 +60,14 @@ export const TabView = <T extends Route>({
   const primary = useToken('colors', 'primary')
   const muted = useToken('colors', 'muted')
 
-  const { smallCoverHeight, insets, tabBarHeight, appWidth } = useValues()
+  const {smallCoverHeight, insets, tabBarHeight, appWidth} = useValues()
   const [index, setIndex] = useState(0)
 
-  const listRef = useRef<{ key: string; value: Animated.FlatList<DataItem> }[]>([])
+  const listRef = useRef<{key: string; value: Animated.FlatList<DataItem>}[]>(
+    [],
+  )
   const listOffset = useRef<Record<string, number>>({})
-  const scrollHandler = useAnimatedScrollHandler((event) => {
+  const scrollHandler = useAnimatedScrollHandler(event => {
     const y = event.contentOffset.y
     scrollY.value = y
     const curRoute = routes[index].key
@@ -64,11 +75,10 @@ export const TabView = <T extends Route>({
   })
   const syncScrollOffset = useCallback(() => {
     const curRouteKey = routes[index].key
-    listRef.current.forEach((item) => {
+    listRef.current.forEach(item => {
       if (item.key !== curRouteKey) {
         if (scrollY.value < paddingTop && scrollY.value >= 0) {
           if (item.value) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore issue: https://github.com/software-mansion/react-native-reanimated/issues/3023
             item.value.scrollToOffset({
               offset: scrollY.value,
@@ -77,9 +87,11 @@ export const TabView = <T extends Route>({
             listOffset.current[item.key] = scrollY.value
           }
         } else if (scrollY.value >= paddingTop) {
-          if (listOffset.current[item.key] < paddingTop || listOffset.current[item.key] == null) {
+          if (
+            listOffset.current[item.key] < paddingTop ||
+            listOffset.current[item.key] == null
+          ) {
             if (item.value) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore issue: https://github.com/software-mansion/react-native-reanimated/issues/3023
               item.value.scrollToOffset({
                 offset: paddingTop,
@@ -107,7 +119,7 @@ export const TabView = <T extends Route>({
             [paddingTop, smallCoverHeight],
             {
               extrapolateRight: Extrapolate.CLAMP,
-            }
+            },
           ),
         },
       ],
@@ -118,20 +130,23 @@ export const TabView = <T extends Route>({
     (
       tabBarProps: SceneRendererProps & {
         navigationState: NavigationState<T>
-      }
+      },
     ) => (
       <Animated.View style={tabBarStyle}>
-        <Box flex={1} _dark={{ bg: 'black' }} _light={{ bg: DefaultTheme.colors.background }}>
+        <Box
+          flex={1}
+          _dark={{bg: 'black'}}
+          _light={{bg: DefaultTheme.colors.background}}>
           <RNTabBar
             {...tabBarProps}
-            style={[styles.tabBar, { borderColor: muted['800'] }]}
+            style={[styles.tabBar, {borderColor: muted['800']}]}
             indicatorStyle={{
               width: INDICATOR_WIDTH,
               left: (appWidth / routes.length - INDICATOR_WIDTH) / 2,
               backgroundColor: primary['500'],
             }}
             onTabPress={Platform.OS === 'web' ? syncScrollOffset : undefined}
-            renderLabel={({ focused, route }) => (
+            renderLabel={({focused, route}) => (
               <Box flexDirection="row" alignItems="center">
                 <Text fontWeight={800} opacity={focused ? 1 : 0.4}>
                   {route.title}
@@ -143,11 +158,11 @@ export const TabView = <T extends Route>({
         </Box>
       </Animated.View>
     ),
-    [appWidth, muted, primary, routes.length, syncScrollOffset, tabBarStyle]
+    [appWidth, muted, primary, routes.length, syncScrollOffset, tabBarStyle],
   )
 
   const renderScene = useCallback<RNTabViewProps<T>['renderScene']>(
-    (sceneProps) =>
+    sceneProps =>
       renderSceneProps({
         ...sceneProps,
         listProps: {
@@ -160,9 +175,11 @@ export const TabView = <T extends Route>({
           onScroll: scrollHandler,
           onMomentumScrollEnd: syncScrollOffset,
           onScrollEndDrag: syncScrollOffset,
-          ref: (ref) => {
+          ref: ref => {
             if (ref) {
-              const found = listRef.current.find((e) => e.key === sceneProps.route.key)
+              const found = listRef.current.find(
+                e => e.key === sceneProps.route.key,
+              )
               if (!found) {
                 listRef.current.push({
                   key: sceneProps.route.key,
@@ -173,14 +190,21 @@ export const TabView = <T extends Route>({
           },
         },
       }),
-    [insets.bottom, paddingTop, renderSceneProps, scrollHandler, syncScrollOffset, tabBarHeight]
+    [
+      insets.bottom,
+      paddingTop,
+      renderSceneProps,
+      scrollHandler,
+      syncScrollOffset,
+      tabBarHeight,
+    ],
   )
 
   return (
     <RNTabView
       renderTabBar={renderTabBar}
       initialLayout={initialLayout}
-      navigationState={{ index, routes }}
+      navigationState={{index, routes}}
       onIndexChange={setIndex}
       renderScene={renderScene}
       onSwipeStart={syncScrollOffset}

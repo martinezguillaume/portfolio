@@ -1,14 +1,18 @@
-import { INativebaseConfig, NativeBaseProvider, StorageManager } from 'native-base'
-import { StyleSheet, View } from 'react-native'
+import {
+  INativebaseConfig,
+  NativeBaseProvider,
+  StorageManager,
+} from 'native-base'
+import {StyleSheet, View} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Font from 'expo-font'
-import { Feather, MaterialCommunityIcons } from '@native-base/icons'
+import {Feather, MaterialCommunityIcons} from '@native-base/icons'
 import * as SplashScreen from 'expo-splash-screen'
-import { useCallback, useEffect, useState } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
-import { Navigation } from './navigation'
-import { theme } from './theme'
-import { useAppStore } from './store'
+import {Navigation} from './navigation'
+import {theme} from './theme'
+import {useAppStore} from './store'
 
 // Native Base config
 const colorModeManager: StorageManager = {
@@ -20,7 +24,7 @@ const colorModeManager: StorageManager = {
       return 'dark'
     }
   },
-  set: async (value) => {
+  set: async value => {
     try {
       if (value) {
         await AsyncStorage.setItem('@color-mode', value)
@@ -40,7 +44,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
-  const locale = useAppStore((state) => state.locale)
+  const locale = useAppStore(state => state.locale)
 
   useEffect(() => {
     async function prepare() {
@@ -48,8 +52,8 @@ export default function App() {
         // const cacheImages = Object.values(IMAGES).map((image) =>
         //   Asset.fromModule(image).downloadAsync()
         // )
-        const cacheFonts = [Feather.font, MaterialCommunityIcons.font].map((font) =>
-          Font.loadAsync(font)
+        const cacheFonts = [Feather.font, MaterialCommunityIcons.font].map(
+          font => Font.loadAsync(font),
         )
 
         await Promise.all([...cacheFonts])

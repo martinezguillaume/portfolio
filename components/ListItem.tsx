@@ -1,8 +1,8 @@
-import { Avatar, Column, Icon, IIconProps, Image, Row, Text } from 'native-base'
-import { memo } from 'react'
-import { Feather, MaterialCommunityIcons } from '@native-base/icons'
+import {Avatar, Column, Icon, IIconProps, Image, Row, Text} from 'native-base'
+import {memo} from 'react'
+import {Feather, MaterialCommunityIcons} from '@native-base/icons'
 
-import { DataItem, DataSkill } from '~/data'
+import {DataItem, DataSkill} from '~/data'
 
 export type ListItemProps = {
   data: DataItem
@@ -53,11 +53,21 @@ const skillIcon: Record<DataSkill, IIconProps> = {
 
 export const ListItem = memo<ListItemProps>(
   ({
-    data: { title, subtitle, avatar, location, startDate, endDate, description, pictures, skills },
+    data: {
+      title,
+      subtitle,
+      avatar,
+      location,
+      startDate,
+      endDate,
+      description,
+      pictures,
+      skills,
+    },
   }) => {
     return (
       <Row px={4} py={2} space={2}>
-        <Avatar source={typeof avatar === 'string' ? { uri: avatar } : avatar} />
+        <Avatar source={typeof avatar === 'string' ? {uri: avatar} : avatar} />
 
         <Column flex={1} space={2}>
           <Text fontWeight={800} fontSize={15}>
@@ -78,16 +88,27 @@ export const ListItem = memo<ListItemProps>(
               overflow="hidden"
               space={0.5}
               borderWidth={1}>
-              {pictures.map((picture) => (
-                <Image key={picture} alt="item-picture" height="100%" flex={1} source={picture} />
+              {pictures.map(picture => (
+                <Image
+                  key={picture}
+                  alt="item-picture"
+                  height="100%"
+                  flex={1}
+                  source={picture}
+                />
               ))}
             </Row>
           )}
 
           {skills && (
             <Row>
-              {skills.map((skill) => (
-                <Icon key={skill} color="muted.500" size={5} {...skillIcon[skill]} />
+              {skills.map(skill => (
+                <Icon
+                  key={skill}
+                  color="muted.500"
+                  size={5}
+                  {...skillIcon[skill]}
+                />
               ))}
             </Row>
           )}
@@ -95,7 +116,8 @@ export const ListItem = memo<ListItemProps>(
           <Row space={2} flexWrap="wrap" alignItems="center">
             {location && (
               <Text color="muted.500">
-                <Icon color="muted.500" size={4} as={Feather} name="map-pin" /> {location}
+                <Icon color="muted.500" size={4} as={Feather} name="map-pin" />{' '}
+                {location}
               </Text>
             )}
 
@@ -108,5 +130,5 @@ export const ListItem = memo<ListItemProps>(
         </Column>
       </Row>
     )
-  }
+  },
 )

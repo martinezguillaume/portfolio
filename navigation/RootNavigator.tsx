@@ -1,16 +1,16 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import { HomeScreen } from '~/screens'
-import { RootStackParamList } from '~/types'
+import {RootStackParamList} from '~/types'
+import {HomeScreen} from '~/screens'
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 export const RootNavigator = () => (
-  <RootStack.Navigator screenOptions={{ headerShown: false }}>
+  <RootStack.Navigator screenOptions={{headerShown: false}}>
     <RootStack.Screen
       name="Home"
       component={HomeScreen}
-      options={{ title: 'Guillaume Martinez - Portfolio' }}
+      options={{title: 'Guillaume Martinez - Portfolio'}}
     />
   </RootStack.Navigator>
 )

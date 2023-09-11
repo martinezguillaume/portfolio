@@ -1,6 +1,6 @@
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs, {Dayjs} from 'dayjs'
 
-import { IMAGES } from './assets'
+import {IMAGES} from './assets'
 
 export type DataSkill =
   | 'aws'
@@ -82,7 +82,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
     },
     {
       id: 3,
-      avatar: 'https://pbs.twimg.com/profile_images/1022057909574950912/n4Rhq6OS_400x400.jpg',
+      avatar:
+        'https://pbs.twimg.com/profile_images/1022057909574950912/n4Rhq6OS_400x400.jpg',
       title: 'InUse',
       subtitle: 'Développeur Front End',
       location: 'Paris, France',
@@ -94,7 +95,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
     },
     {
       id: 2,
-      avatar: 'https://pbs.twimg.com/profile_images/1199614550200475648/8RhJUPqy_400x400.jpg',
+      avatar:
+        'https://pbs.twimg.com/profile_images/1199614550200475648/8RhJUPqy_400x400.jpg',
       description:
         "Titre d'ingénieurie en informatique obtenu en 3 ans en tant qu'alternant au sein de l'EPITA.",
       pictures: [require('~/assets/images/school-epita.jpg')],
@@ -107,7 +109,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
     },
     {
       id: 1,
-      avatar: 'https://pbs.twimg.com/profile_images/698184181579440129/SWIxrzd__400x400.jpg',
+      avatar:
+        'https://pbs.twimg.com/profile_images/698184181579440129/SWIxrzd__400x400.jpg',
       title: 'Université Paris-Sud',
       subtitle: 'DUT Informatique',
       location: 'Orsay, France',
