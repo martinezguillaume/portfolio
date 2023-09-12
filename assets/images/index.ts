@@ -1,5 +1,5 @@
 export const IMAGES = {
-  cover: require('./cover.jpeg'),
+  cover: require('./cover.png'),
   avatar: require('./avatar.jpg'),
   totem: require('./totem.png'),
   t2m: require('./t2m.jpg'),
