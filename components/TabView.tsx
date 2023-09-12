@@ -1,4 +1,3 @@
-import {DefaultTheme} from '@react-navigation/native'
 import {Box, Divider, Text, useToken} from 'native-base'
 import {
   ReactElement,
@@ -29,6 +28,8 @@ import {
 
 import {DataItem} from '~/data'
 import {useValues} from '~/hooks'
+
+import {Background} from './Background'
 
 const initialLayout = {width: Dimensions.get('window').width}
 const INDICATOR_WIDTH = 100
@@ -133,10 +134,8 @@ export const TabView = <T extends Route>({
       },
     ) => (
       <Animated.View style={tabBarStyle}>
-        <Box
-          flex={1}
-          _dark={{bg: 'black'}}
-          _light={{bg: DefaultTheme.colors.background}}>
+        <Background />
+        <Box flex={1}>
           <RNTabBar
             {...tabBarProps}
             style={[styles.tabBar, {borderColor: muted['800']}]}

@@ -15,6 +15,7 @@ import {
   TabView,
   TabViewProps,
   ColorModeFab,
+  Background,
 } from '~/components'
 import {data, DataItem} from '~/data'
 import {useValues} from '~/hooks'
@@ -60,6 +61,8 @@ export const HomeScreen: FC<Props> = () => {
 
   return (
     <>
+      <Background />
+
       <Box
         flex={1}
         _web={{
