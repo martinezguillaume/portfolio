@@ -1,14 +1,28 @@
-import {Avatar, Column, Icon, IIconProps, Image, Row, Text} from 'native-base'
+import {
+  Avatar,
+  Column,
+  Icon,
+  IIconProps,
+  Image,
+  Row,
+  Text,
+  IImageProps,
+} from 'native-base'
 import {memo} from 'react'
 import {Feather, MaterialCommunityIcons} from '@native-base/icons'
+import dayjs from 'dayjs'
 
 import {DataItem, DataSkill} from '~/data'
+import {ICONS} from '~/assets'
 
 export type ListItemProps = {
   data: DataItem
 }
 
-const skillIcon: Record<DataSkill, IIconProps> = {
+const skillIcon: Record<
+  DataSkill,
+  ({type?: 'icon'} & IIconProps) | ({type: 'image'} & IImageProps)
+> = {
   react: {
     as: MaterialCommunityIcons,
     name: 'react',
@@ -17,10 +31,6 @@ const skillIcon: Record<DataSkill, IIconProps> = {
     as: MaterialCommunityIcons,
     name: 'aws',
   },
-  nodejs: {
-    as: MaterialCommunityIcons,
-    name: 'nodejs',
-  },
   html: {
     as: MaterialCommunityIcons,
     name: 'language-html5',
@@ -28,14 +38,6 @@ const skillIcon: Record<DataSkill, IIconProps> = {
   css: {
     as: MaterialCommunityIcons,
     name: 'language-css3',
-  },
-  sql: {
-    as: MaterialCommunityIcons,
-    name: 'database',
-  },
-  python: {
-    as: MaterialCommunityIcons,
-    name: 'language-python',
   },
   js: {
     as: MaterialCommunityIcons,
@@ -48,6 +50,36 @@ const skillIcon: Record<DataSkill, IIconProps> = {
   graphql: {
     as: MaterialCommunityIcons,
     name: 'graphql',
+  },
+  'react-native': {
+    as: MaterialCommunityIcons,
+    name: 'react',
+  },
+  java: {
+    as: MaterialCommunityIcons,
+    name: 'language-java',
+    size: 6,
+  },
+  kotlin: {
+    as: MaterialCommunityIcons,
+    name: 'language-kotlin',
+    size: 5,
+  },
+  swift: {
+    as: MaterialCommunityIcons,
+    name: 'language-swift',
+  },
+  'objective-c': {
+    type: 'image',
+    source: ICONS['objective-c'],
+    alt: 'objective-c',
+    size: 6,
+  },
+  expo: {
+    type: 'image',
+    source: ICONS.expo,
+    alt: 'expo',
+    px: 1,
   },
 }
 
@@ -101,15 +133,25 @@ export const ListItem = memo<ListItemProps>(
           )}
 
           {skills && (
-            <Row>
-              {skills.map(skill => (
-                <Icon
-                  key={skill}
-                  color="muted.500"
-                  size={5}
-                  {...skillIcon[skill]}
-                />
-              ))}
+            <Row alignItems="center">
+              {skills.map(skill => {
+                const icon = skillIcon[skill]
+                if (icon.type === 'image') {
+                  return (
+                    <Image
+                      key={skill}
+                      tintColor="muted.500"
+                      size={4}
+                      resizeMode="contain"
+                      {...icon}
+                    />
+                  )
+                } else {
+                  return (
+                    <Icon key={skill} color="muted.500" size={5} {...icon} />
+                  )
+                }
+              })}
             </Row>
           )}
 
@@ -123,8 +165,8 @@ export const ListItem = memo<ListItemProps>(
 
             <Text color="muted.500">
               <Icon color="muted.500" size={4} as={Feather} name="calendar" />{' '}
-              {startDate.format(!endDate ? 'MMMM YYYY' : 'MMM YYYY')}
-              {endDate && ` - ${endDate.format('MMM YYYY')}`}
+              {dayjs(startDate).format(!endDate ? 'MMMM YYYY' : 'MMM YYYY')}
+              {endDate && ` - ${dayjs(endDate).format('MMM YYYY')}`}
             </Text>
           </Row>
         </Column>

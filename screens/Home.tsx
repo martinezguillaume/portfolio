@@ -86,8 +86,7 @@ export const HomeScreen: FC<Props> = () => {
         position={{md: 'absolute'}}
         bottom={0}
         right={0}
-        borderWidth={1}
-        _web={{borderWidth: 0}}>
+        borderWidth={{sm: 1, md: 0}}>
         <Text
           textAlign="center"
           fontWeight={700}
