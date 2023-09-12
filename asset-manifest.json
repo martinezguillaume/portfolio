@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.c070f7f7.js",
-    "static/js/960.36b5a78e.js": "/portfolio/static/js/960.36b5a78e.js",
+    "main.js": "/portfolio/static/js/main.a583f0f6.js",
+    "static/js/960.178f1b51.js": "/portfolio/static/js/960.178f1b51.js",
     "static/media/cover.png": "/portfolio/static/media/cover.0ff00b5b8b8b04df48a8.png",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
     "static/media/faks-1.webp": "/portfolio/static/media/faks-1.3eb52dc1900e0cf69478.webp",
@@ -48,11 +48,11 @@
     "favicon-16.png": "/portfolio/favicon-16.png",
     "serve.json": "/portfolio/serve.json",
     "manifest.json": "/portfolio/manifest.json",
-    "main.c070f7f7.js.map": "/portfolio/static/js/main.c070f7f7.js.map",
-    "960.36b5a78e.js.map": "/portfolio/static/js/960.36b5a78e.js.map"
+    "main.a583f0f6.js.map": "/portfolio/static/js/main.a583f0f6.js.map",
+    "960.178f1b51.js.map": "/portfolio/static/js/960.178f1b51.js.map"
   },
   "entrypoints": [
-    "static/js/960.36b5a78e.js",
-    "static/js/main.c070f7f7.js"
+    "static/js/960.178f1b51.js",
+    "static/js/main.a583f0f6.js"
   ]
 }
