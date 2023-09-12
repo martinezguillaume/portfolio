@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.a583f0f6.js",
-    "static/js/960.178f1b51.js": "/portfolio/static/js/960.178f1b51.js",
+    "main.js": "/portfolio/static/js/main.92cac931.js",
+    "static/js/557.70f1a8f6.js": "/portfolio/static/js/557.70f1a8f6.js",
     "static/media/cover.png": "/portfolio/static/media/cover.0ff00b5b8b8b04df48a8.png",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
     "static/media/faks-1.webp": "/portfolio/static/media/faks-1.3eb52dc1900e0cf69478.webp",
@@ -21,6 +21,7 @@
     "static/media/goodbet-1.png": "/portfolio/static/media/goodbet-1.e84d7bc2698e1c2567aa.png",
     "static/media/design4green-1.jpeg": "/portfolio/static/media/design4green-1.deff98aadfddf320aabf.jpeg",
     "static/media/tamers-2.png": "/portfolio/static/media/tamers-2.488f16faf430ed0bc99b.png",
+    "static/media/Ionicons.ttf": "/portfolio/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
     "static/media/elium-4.jpeg": "/portfolio/static/media/elium-4.e422184958b7e94353b2.jpeg",
     "static/media/school-epita.jpg": "/portfolio/static/media/school-epita.0f6e90259c75f36c9162.jpg",
     "static/media/totem-1.jpeg": "/portfolio/static/media/totem-1.871518f5eba901ef14ff.jpeg",
@@ -48,11 +49,11 @@
     "favicon-16.png": "/portfolio/favicon-16.png",
     "serve.json": "/portfolio/serve.json",
     "manifest.json": "/portfolio/manifest.json",
-    "main.a583f0f6.js.map": "/portfolio/static/js/main.a583f0f6.js.map",
-    "960.178f1b51.js.map": "/portfolio/static/js/960.178f1b51.js.map"
+    "main.92cac931.js.map": "/portfolio/static/js/main.92cac931.js.map",
+    "557.70f1a8f6.js.map": "/portfolio/static/js/557.70f1a8f6.js.map"
   },
   "entrypoints": [
-    "static/js/960.178f1b51.js",
-    "static/js/main.a583f0f6.js"
+    "static/js/557.70f1a8f6.js",
+    "static/js/main.92cac931.js"
   ]
 }
