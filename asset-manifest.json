@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.155ab361.js",
-    "static/js/960.0d95e1dc.js": "/portfolio/static/js/960.0d95e1dc.js",
-    "static/media/cover.jpeg": "/portfolio/static/media/cover.c04689f54d5b82acbb26.jpeg",
+    "main.js": "/portfolio/static/js/main.c070f7f7.js",
+    "static/js/960.36b5a78e.js": "/portfolio/static/js/960.36b5a78e.js",
+    "static/media/cover.png": "/portfolio/static/media/cover.0ff00b5b8b8b04df48a8.png",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
     "static/media/faks-1.webp": "/portfolio/static/media/faks-1.3eb52dc1900e0cf69478.webp",
     "static/media/MaterialCommunityIcons.ttf": "/portfolio/static/media/MaterialCommunityIcons.a7629910d13716b7080c.ttf",
     "static/media/faks-3.webp": "/portfolio/static/media/faks-3.d249de4b6b7a09577ea1.webp",
     "static/media/milinus-2.png": "/portfolio/static/media/milinus-2.f723a2bb5a7df2ca46d6.png",
     "static/media/elium-3.webp": "/portfolio/static/media/elium-3.f8aae191da4c59178c1f.webp",
+    "static/media/avatar.jpg": "/portfolio/static/media/avatar.8f0a2b11c37ec187a1bd.jpg",
     "static/media/faks-4.png": "/portfolio/static/media/faks-4.30a343d8d941fd799176.png",
     "static/media/tamers-3.png": "/portfolio/static/media/tamers-3.871572bc8bc7e2767d73.png",
     "static/media/tamers-1.png": "/portfolio/static/media/tamers-1.568ca071f987cf7b28fb.png",
@@ -31,7 +32,6 @@
     "static/media/totem.png": "/portfolio/static/media/totem.f52f4a13256bfb44e27a.png",
     "static/media/elium-1.webp": "/portfolio/static/media/elium-1.3289c9ffbbba87fad49e.webp",
     "static/media/elium-2.webp": "/portfolio/static/media/elium-2.317ce9a27469a3f61ab9.webp",
-    "static/media/avatar.jpg": "/portfolio/static/media/avatar.474e77805a43d699baf1.jpg",
     "favicon.ico": "/portfolio/favicon.ico",
     "static/media/safety-olympics-sodexo.jpeg": "/portfolio/static/media/safety-olympics-sodexo.56e4861fc3e1c69b51f0.jpeg",
     "static/media/nobel-game.png": "/portfolio/static/media/nobel-game.3be6ce762c280a7e5073.png",
@@ -48,11 +48,11 @@
     "favicon-16.png": "/portfolio/favicon-16.png",
     "serve.json": "/portfolio/serve.json",
     "manifest.json": "/portfolio/manifest.json",
-    "main.155ab361.js.map": "/portfolio/static/js/main.155ab361.js.map",
-    "960.0d95e1dc.js.map": "/portfolio/static/js/960.0d95e1dc.js.map"
+    "main.c070f7f7.js.map": "/portfolio/static/js/main.c070f7f7.js.map",
+    "960.36b5a78e.js.map": "/portfolio/static/js/960.36b5a78e.js.map"
   },
   "entrypoints": [
-    "static/js/960.0d95e1dc.js",
-    "static/js/main.155ab361.js"
+    "static/js/960.36b5a78e.js",
+    "static/js/main.c070f7f7.js"
   ]
 }
