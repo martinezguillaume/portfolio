@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.a551690b.js",
-    "static/js/776.d3a5d9d2.js": "/portfolio/static/js/776.d3a5d9d2.js",
+    "main.js": "/portfolio/static/js/main.155ab361.js",
+    "static/js/960.0d95e1dc.js": "/portfolio/static/js/960.0d95e1dc.js",
     "static/media/cover.jpeg": "/portfolio/static/media/cover.c04689f54d5b82acbb26.jpeg",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
     "static/media/faks-1.webp": "/portfolio/static/media/faks-1.3eb52dc1900e0cf69478.webp",
@@ -23,6 +23,7 @@
     "static/media/elium-4.jpeg": "/portfolio/static/media/elium-4.e422184958b7e94353b2.jpeg",
     "static/media/school-epita.jpg": "/portfolio/static/media/school-epita.0f6e90259c75f36c9162.jpg",
     "static/media/totem-1.jpeg": "/portfolio/static/media/totem-1.871518f5eba901ef14ff.jpeg",
+    "static/media/splash.png": "/portfolio/static/media/splash.b1b2a62aaa929572ba39.png",
     "static/media/faks-2.webp": "/portfolio/static/media/faks-2.0593d1f150532b3d689c.webp",
     "static/media/Feather.ttf": "/portfolio/static/media/Feather.11cd1d79299f3bb42d00.ttf",
     "static/media/iut-orsay.jpg": "/portfolio/static/media/iut-orsay.891898b53f2bb52000df.jpg",
@@ -34,22 +35,24 @@
     "favicon.ico": "/portfolio/favicon.ico",
     "static/media/safety-olympics-sodexo.jpeg": "/portfolio/static/media/safety-olympics-sodexo.56e4861fc3e1c69b51f0.jpeg",
     "static/media/nobel-game.png": "/portfolio/static/media/nobel-game.3be6ce762c280a7e5073.png",
+    "static/media/objective-c.png": "/portfolio/static/media/objective-c.84cd3fefd34aaebbcafd.png",
     "static/media/faks.webp": "/portfolio/static/media/faks.120460d30de480bb9f4e.webp",
     "static/media/goodbet.png": "/portfolio/static/media/goodbet.82b26da558f9fa29674c.png",
     "static/media/design4green.jpeg": "/portfolio/static/media/design4green.3083d8f02071f43e740a.jpeg",
+    "static/media/expo.png": "/portfolio/static/media/expo.aaa1f7b1bafa6529ca44.png",
     "static/media/milinus.png": "/portfolio/static/media/milinus.334ba954e0075e628fb4.png",
     "index.html": "/portfolio/index.html",
     "static/media/t2m.jpg": "/portfolio/static/media/t2m.e0a84f9bfa2854c4fe97.jpg",
     "static/media/elium.webp": "/portfolio/static/media/elium.2c719e712c41520145e2.webp",
     "favicon-32.png": "/portfolio/favicon-32.png",
     "favicon-16.png": "/portfolio/favicon-16.png",
-    "manifest.json": "/portfolio/manifest.json",
     "serve.json": "/portfolio/serve.json",
-    "main.a551690b.js.map": "/portfolio/static/js/main.a551690b.js.map",
-    "776.d3a5d9d2.js.map": "/portfolio/static/js/776.d3a5d9d2.js.map"
+    "manifest.json": "/portfolio/manifest.json",
+    "main.155ab361.js.map": "/portfolio/static/js/main.155ab361.js.map",
+    "960.0d95e1dc.js.map": "/portfolio/static/js/960.0d95e1dc.js.map"
   },
   "entrypoints": [
-    "static/js/776.d3a5d9d2.js",
-    "static/js/main.a551690b.js"
+    "static/js/960.0d95e1dc.js",
+    "static/js/main.155ab361.js"
   ]
 }
