@@ -13,9 +13,13 @@ export const LocaleFab: FC = memo(() => {
       // eslint-disable-next-line react/no-unstable-nested-components
       trigger={triggerProps => (
         <Fab
+          {...triggerProps}
           height="48px"
           width="48px"
-          {...triggerProps}
+          _dark={{bg: 'white'}}
+          _light={{bg: 'black'}}
+          p={0}
+          _text={{fontSize: '2xl'}}
           label={locale === 'fr' ? '🇫🇷' : '🇬🇧'}
         />
       )}>
