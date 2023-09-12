@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "npx tsc && yarn lint",
+    "test": "tsc && bun run lint",
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
     "deploy": "gh-pages -d web-build",
     "predeploy": "npx expo export:web"
