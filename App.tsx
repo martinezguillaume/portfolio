@@ -9,10 +9,12 @@ import * as Font from 'expo-font'
 import {Feather, MaterialCommunityIcons} from '@native-base/icons'
 import * as SplashScreen from 'expo-splash-screen'
 import {useCallback, useEffect, useState} from 'react'
+import {Asset} from 'expo-asset'
 
 import {Navigation} from './navigation'
 import {theme} from './theme'
 import {useAppStore} from './store'
+import {ICONS, IMAGES} from './assets'
 
 // Native Base config
 const colorModeManager: StorageManager = {
@@ -49,14 +51,15 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        // const cacheImages = Object.values(IMAGES).map((image) =>
-        //   Asset.fromModule(image).downloadAsync()
-        // )
+        const cacheImages = [
+          ...Object.values(IMAGES),
+          ...Object.values(ICONS),
+        ].map(image => Asset.fromModule(image).downloadAsync())
         const cacheFonts = [Feather.font, MaterialCommunityIcons.font].map(
           font => Font.loadAsync(font),
         )
 
-        await Promise.all([...cacheFonts])
+        await Promise.all([...cacheFonts, ...cacheImages])
       } catch (e) {
         console.warn(e)
       } finally {
