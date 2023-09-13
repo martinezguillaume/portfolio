@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.92cac931.js",
+    "main.js": "/portfolio/static/js/main.383222ae.js",
     "static/js/557.70f1a8f6.js": "/portfolio/static/js/557.70f1a8f6.js",
     "static/media/cover.png": "/portfolio/static/media/cover.0ff00b5b8b8b04df48a8.png",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
@@ -49,11 +49,11 @@
     "favicon-16.png": "/portfolio/favicon-16.png",
     "serve.json": "/portfolio/serve.json",
     "manifest.json": "/portfolio/manifest.json",
-    "main.92cac931.js.map": "/portfolio/static/js/main.92cac931.js.map",
+    "main.383222ae.js.map": "/portfolio/static/js/main.383222ae.js.map",
     "557.70f1a8f6.js.map": "/portfolio/static/js/557.70f1a8f6.js.map"
   },
   "entrypoints": [
     "static/js/557.70f1a8f6.js",
-    "static/js/main.92cac931.js"
+    "static/js/main.383222ae.js"
   ]
 }
