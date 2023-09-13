@@ -7,9 +7,9 @@ export const ColorModeFab = memo(() => {
 
   return (
     <Fab
-      right={20}
-      height="48px"
-      width="48px"
+      right="80px"
+      height="56px"
+      width="56px"
       onPress={toggleColorMode}
       _dark={{bg: 'white'}}
       _light={{bg: 'black'}}

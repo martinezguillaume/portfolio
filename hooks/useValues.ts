@@ -3,10 +3,10 @@ import {useMemo} from 'react'
 import {Dimensions} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-export const COVER_HEIGHT = 150
+export const COVER_HEIGHT = 160
 export const COVER_HEIGHT_SMALL = 80
-export const AVATAR_SIZE = 120
-export const AVATAR_SIZE_SMALL = 80
+export const AVATAR_SIZE = 160
+export const AVATAR_SIZE_SMALL = 100
 
 export const useValues = () => {
   const insets = useSafeAreaInsets()

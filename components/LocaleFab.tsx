@@ -14,8 +14,8 @@ export const LocaleFab: FC = memo(() => {
       trigger={triggerProps => (
         <Fab
           {...triggerProps}
-          height="48px"
-          width="48px"
+          height="56px"
+          width="56px"
           _dark={{bg: 'white'}}
           _light={{bg: 'black'}}
           p={0}

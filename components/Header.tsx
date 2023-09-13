@@ -165,11 +165,11 @@ export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
         icon: 'gift',
         description: i18n.t('home.birthdayDescription'),
       },
-      {
-        icon: 'github',
-        link: 'github.com/martinezguillaume/portfolio',
-        description: 'github.com',
-      },
+      // {
+      //   icon: 'github',
+      //   link: 'github.com/martinezguillaume/portfolio',
+      //   description: 'github.com',
+      // },
       {
         icon: 'calendar',
         description: i18n.t('home.developerDescription'),
@@ -201,12 +201,8 @@ export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
                 _dark={{borderColor: 'white'}}
               />
               <Box ml={2}>
-                <Text textAlign="center" fontWeight={800}>
-                  Guillaume Martinez
-                </Text>
-                <Text textAlign="center" fontSize={12}>
-                  {i18n.t('home.title')}
-                </Text>
+                <Text fontWeight={800}>Guillaume Martinez</Text>
+                <Text fontSize={12}>{i18n.t('home.title')}</Text>
               </Box>
             </Box>
           </Animated.View>
