@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.383222ae.js",
-    "static/js/557.70f1a8f6.js": "/portfolio/static/js/557.70f1a8f6.js",
-    "static/media/cover.png": "/portfolio/static/media/cover.0ff00b5b8b8b04df48a8.png",
+    "main.js": "/portfolio/static/js/main.048c8788.js",
+    "static/js/557.fc64e389.js": "/portfolio/static/js/557.fc64e389.js",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
     "static/media/faks-1.webp": "/portfolio/static/media/faks-1.3eb52dc1900e0cf69478.webp",
     "static/media/MaterialCommunityIcons.ttf": "/portfolio/static/media/MaterialCommunityIcons.a7629910d13716b7080c.ttf",
     "static/media/faks-3.webp": "/portfolio/static/media/faks-3.d249de4b6b7a09577ea1.webp",
     "static/media/milinus-2.png": "/portfolio/static/media/milinus-2.f723a2bb5a7df2ca46d6.png",
     "static/media/elium-3.webp": "/portfolio/static/media/elium-3.f8aae191da4c59178c1f.webp",
-    "static/media/avatar.jpg": "/portfolio/static/media/avatar.8f0a2b11c37ec187a1bd.jpg",
     "static/media/faks-4.png": "/portfolio/static/media/faks-4.30a343d8d941fd799176.png",
     "static/media/tamers-3.png": "/portfolio/static/media/tamers-3.871572bc8bc7e2767d73.png",
     "static/media/tamers-1.png": "/portfolio/static/media/tamers-1.568ca071f987cf7b28fb.png",
@@ -28,9 +26,9 @@
     "static/media/splash.png": "/portfolio/static/media/splash.b1b2a62aaa929572ba39.png",
     "static/media/faks-2.webp": "/portfolio/static/media/faks-2.0593d1f150532b3d689c.webp",
     "static/media/Feather.ttf": "/portfolio/static/media/Feather.11cd1d79299f3bb42d00.ttf",
+    "static/media/cover.webp": "/portfolio/static/media/cover.f4b97819f6efe0cc392d.webp",
     "static/media/iut-orsay.jpg": "/portfolio/static/media/iut-orsay.891898b53f2bb52000df.jpg",
     "static/media/tamers.webp": "/portfolio/static/media/tamers.7d114026b155b29b2f58.webp",
-    "static/media/totem.png": "/portfolio/static/media/totem.f52f4a13256bfb44e27a.png",
     "static/media/elium-1.webp": "/portfolio/static/media/elium-1.3289c9ffbbba87fad49e.webp",
     "static/media/elium-2.webp": "/portfolio/static/media/elium-2.317ce9a27469a3f61ab9.webp",
     "favicon.ico": "/portfolio/favicon.ico",
@@ -41,19 +39,21 @@
     "static/media/goodbet.png": "/portfolio/static/media/goodbet.82b26da558f9fa29674c.png",
     "static/media/design4green.jpeg": "/portfolio/static/media/design4green.3083d8f02071f43e740a.jpeg",
     "static/media/expo.png": "/portfolio/static/media/expo.aaa1f7b1bafa6529ca44.png",
+    "static/media/avatar.webp": "/portfolio/static/media/avatar.4aedc8ca1e03de1f05cb.webp",
     "static/media/milinus.png": "/portfolio/static/media/milinus.334ba954e0075e628fb4.png",
     "index.html": "/portfolio/index.html",
     "static/media/t2m.jpg": "/portfolio/static/media/t2m.e0a84f9bfa2854c4fe97.jpg",
     "static/media/elium.webp": "/portfolio/static/media/elium.2c719e712c41520145e2.webp",
     "favicon-32.png": "/portfolio/favicon-32.png",
+    "static/media/totem.webp": "/portfolio/static/media/totem.ef3e236a03321fee8d10.webp",
     "favicon-16.png": "/portfolio/favicon-16.png",
     "serve.json": "/portfolio/serve.json",
     "manifest.json": "/portfolio/manifest.json",
-    "main.383222ae.js.map": "/portfolio/static/js/main.383222ae.js.map",
-    "557.70f1a8f6.js.map": "/portfolio/static/js/557.70f1a8f6.js.map"
+    "main.048c8788.js.map": "/portfolio/static/js/main.048c8788.js.map",
+    "557.fc64e389.js.map": "/portfolio/static/js/557.fc64e389.js.map"
   },
   "entrypoints": [
-    "static/js/557.70f1a8f6.js",
-    "static/js/main.383222ae.js"
+    "static/js/557.fc64e389.js",
+    "static/js/main.048c8788.js"
   ]
 }
