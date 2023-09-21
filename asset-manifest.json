@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/portfolio/static/js/main.048c8788.js",
+    "main.js": "/portfolio/static/js/main.73e82372.js",
     "static/js/557.fc64e389.js": "/portfolio/static/js/557.fc64e389.js",
     "static/media/milinus-1.png": "/portfolio/static/media/milinus-1.dba3363fca9fdd34c6b7.png",
     "static/media/faks-1.webp": "/portfolio/static/media/faks-1.3eb52dc1900e0cf69478.webp",
@@ -22,8 +22,8 @@
     "static/media/Ionicons.ttf": "/portfolio/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
     "static/media/elium-4.jpeg": "/portfolio/static/media/elium-4.e422184958b7e94353b2.jpeg",
     "static/media/school-epita.jpg": "/portfolio/static/media/school-epita.0f6e90259c75f36c9162.jpg",
-    "static/media/totem-1.jpeg": "/portfolio/static/media/totem-1.871518f5eba901ef14ff.jpeg",
     "static/media/splash.png": "/portfolio/static/media/splash.b1b2a62aaa929572ba39.png",
+    "static/media/totem-1.webp": "/portfolio/static/media/totem-1.cc7a359d7c040ca36542.webp",
     "static/media/faks-2.webp": "/portfolio/static/media/faks-2.0593d1f150532b3d689c.webp",
     "static/media/Feather.ttf": "/portfolio/static/media/Feather.11cd1d79299f3bb42d00.ttf",
     "static/media/cover.webp": "/portfolio/static/media/cover.f4b97819f6efe0cc392d.webp",
@@ -40,20 +40,20 @@
     "static/media/design4green.jpeg": "/portfolio/static/media/design4green.3083d8f02071f43e740a.jpeg",
     "static/media/expo.png": "/portfolio/static/media/expo.aaa1f7b1bafa6529ca44.png",
     "static/media/avatar.webp": "/portfolio/static/media/avatar.4aedc8ca1e03de1f05cb.webp",
-    "static/media/milinus.png": "/portfolio/static/media/milinus.334ba954e0075e628fb4.png",
     "index.html": "/portfolio/index.html",
     "static/media/t2m.jpg": "/portfolio/static/media/t2m.e0a84f9bfa2854c4fe97.jpg",
     "static/media/elium.webp": "/portfolio/static/media/elium.2c719e712c41520145e2.webp",
     "favicon-32.png": "/portfolio/favicon-32.png",
     "static/media/totem.webp": "/portfolio/static/media/totem.ef3e236a03321fee8d10.webp",
     "favicon-16.png": "/portfolio/favicon-16.png",
+    "static/media/milinus.webp": "/portfolio/static/media/milinus.93e24f6f280bd9af4c1d.webp",
     "serve.json": "/portfolio/serve.json",
     "manifest.json": "/portfolio/manifest.json",
-    "main.048c8788.js.map": "/portfolio/static/js/main.048c8788.js.map",
+    "main.73e82372.js.map": "/portfolio/static/js/main.73e82372.js.map",
     "557.fc64e389.js.map": "/portfolio/static/js/557.fc64e389.js.map"
   },
   "entrypoints": [
     "static/js/557.fc64e389.js",
-    "static/js/main.048c8788.js"
+    "static/js/main.73e82372.js"
   ]
 }
