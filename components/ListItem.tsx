@@ -9,7 +9,6 @@ import {
   IImageProps,
 } from 'native-base'
 import {memo} from 'react'
-import {Feather, MaterialCommunityIcons} from '@native-base/icons'
 import dayjs from 'dayjs'
 
 import {DataItem, DataSkill} from '~/data'
@@ -24,49 +23,49 @@ const skillIcon: Record<
   ({type?: 'icon'} & IIconProps) | ({type: 'image'} & IImageProps)
 > = {
   react: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'react',
   },
   aws: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'aws',
   },
   html: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-html5',
   },
   css: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-css3',
   },
   js: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-javascript',
   },
   ts: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-typescript',
   },
   graphql: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'graphql',
   },
   'react-native': {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'react',
   },
   java: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-java',
     size: 6,
   },
   kotlin: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-kotlin',
     size: 5,
   },
   swift: {
-    as: MaterialCommunityIcons,
+    // as: MaterialCommunityIcons,
     name: 'language-swift',
   },
   'objective-c': {
@@ -158,13 +157,14 @@ export const ListItem = memo<ListItemProps>(
           <Row space={2} flexWrap="wrap" alignItems="center">
             {location && (
               <Text color="muted.500">
-                <Icon color="muted.500" size={4} as={Feather} name="map-pin" />{' '}
-                {location}
+                {/* FIXME: add an icon */}
+                <Icon color="muted.500" size={4} name="map-pin" /> {location}
               </Text>
             )}
 
             <Text color="muted.500">
-              <Icon color="muted.500" size={4} as={Feather} name="calendar" />{' '}
+              {/* FIXME: add an icon */}
+              <Icon color="muted.500" size={4} name="calendar" />{' '}
               {dayjs(startDate).format(!endDate ? 'MMMM YYYY' : 'MMM YYYY')}
               {endDate && ` - ${dayjs(endDate).format('MMM YYYY')}`}
             </Text>

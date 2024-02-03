@@ -1,6 +1,5 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack'
 import {Box, Divider, Text} from 'native-base'
-import {FC, useCallback, useState} from 'react'
+import {useCallback, useState, ReactElement} from 'react'
 import {LayoutChangeEvent, ListRenderItem, StyleSheet} from 'react-native'
 import Animated, {useSharedValue} from 'react-native-reanimated'
 import {Route} from 'react-native-tab-view'
@@ -17,12 +16,9 @@ import {
 } from '~/components'
 import {data, DataItem} from '~/data'
 import {useValues} from '~/hooks'
-import {RootStackParamList} from '~/types'
 import {i18n} from '~/i18n'
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
-
-export const HomeScreen: FC<Props> = () => {
+export default function Home(): ReactElement {
   const theme = useTheme()
   const scrollY = useSharedValue(0)
   const [headerHeight, setHeaderHeight] = useState(0)

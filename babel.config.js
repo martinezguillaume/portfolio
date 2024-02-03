@@ -9,7 +9,6 @@ module.exports = function (api) {
           root: ['.'],
           alias: {
             '^~/(.+)': './\\1',
-            '@native-base/icons': '@native-base/icons/lib',
           },
         },
       ],

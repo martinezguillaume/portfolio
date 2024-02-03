@@ -18,7 +18,6 @@ import Animated, {
 } from 'react-native-reanimated'
 import {BlurView, BlurViewProps} from 'expo-blur'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
-import {Feather} from '@native-base/icons'
 
 import {i18n} from '~/i18n'
 import {IMAGES} from '~/assets'
@@ -235,7 +234,8 @@ export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
               fontSize={12}
               ml={1}
               mt={2}>
-              <Icon color="muted.500" size={4} as={Feather} name={item.icon} />{' '}
+              {/* FIXME: add an icon */}
+              <Icon color="muted.500" size={4} name={item.icon} />{' '}
               {item.description}
             </Text>
           ))}
