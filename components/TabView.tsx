@@ -8,8 +8,6 @@ import {
   useState,
 } from 'react'
 import {Dimensions, Platform, ScrollViewProps, StyleSheet} from 'react-native'
-// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
-// eslint-disable-next-line import/default
 import Animated, {
   Extrapolate,
   interpolate,

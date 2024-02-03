@@ -10,8 +10,6 @@ import {
 } from 'native-base'
 import {memo, useMemo} from 'react'
 import {StyleSheet, Platform, LayoutChangeEvent} from 'react-native'
-// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
-// eslint-disable-next-line import/default
 import Animated, {
   Extrapolation,
   interpolate,

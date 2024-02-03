@@ -2,8 +2,6 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack'
 import {Box, Divider, Text} from 'native-base'
 import {FC, useCallback, useState} from 'react'
 import {LayoutChangeEvent, ListRenderItem, StyleSheet} from 'react-native'
-// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
-// eslint-disable-next-line import/default
 import Animated, {useSharedValue} from 'react-native-reanimated'
 import {Route} from 'react-native-tab-view'
 import {useTheme} from '@react-navigation/native'

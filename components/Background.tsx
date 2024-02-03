@@ -1,8 +1,6 @@
 import {memo, useEffect} from 'react'
 import {StyleSheet} from 'react-native'
 import {Box, useColorMode} from 'native-base'
-// FIXME: https://github.com/software-mansion/react-native-reanimated/issues/3614
-// eslint-disable-next-line import/default
 import Animated, {
   interpolateColor,
   useAnimatedStyle,
