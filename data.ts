@@ -80,7 +80,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: '2019-08-01',
       description:
         'Développement de multiples applications mobiles et applications web en react et react-native.\nCréation UI & UX pour certains projets.',
-      pictures: [require('~/assets/images/totem-1.jpeg')],
+      pictures: [require('~/assets/images/totem-1.webp')],
       skills: ['react-native', 'ts', 'graphql', 'aws'],
     },
     {
