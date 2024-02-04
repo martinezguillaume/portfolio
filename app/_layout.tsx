@@ -13,9 +13,9 @@ import {
 } from 'native-base'
 import {useEffect} from 'react'
 
-import {ICONS, IMAGES} from '~/assets'
-import {useAppStore} from '~/store'
-import {theme} from '~/theme'
+import {ICONS, IMAGES} from '@/assets'
+import {useAppStore} from '@/store'
+import {theme} from '@/theme'
 
 // Native Base config
 const colorModeManager: StorageManager = {

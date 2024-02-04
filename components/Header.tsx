@@ -19,9 +19,9 @@ import Animated, {
 import {BlurView, BlurViewProps} from 'expo-blur'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {i18n} from '~/i18n'
-import {IMAGES} from '~/assets'
-import {useValues} from '~/hooks'
+import {i18n} from '@/i18n'
+import {IMAGES} from '@/assets'
+import {useValues} from '@/hooks'
 
 export type HeaderProps = {
   scrollY: Animated.SharedValue<number>

@@ -1,8 +1,8 @@
 import {Fab, Menu} from 'native-base'
 import {FC, memo} from 'react'
 
-import {i18n} from '~/i18n'
-import {useAppStore} from '~/store'
+import {i18n} from '@/i18n'
+import {useAppStore} from '@/store'
 
 export const LocaleFab: FC = memo(() => {
   const setLocale = useAppStore(state => state.setLocale)

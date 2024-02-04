@@ -11,8 +11,8 @@ import {
 import {memo} from 'react'
 import dayjs from 'dayjs'
 
-import {DataItem, DataSkill} from '~/data'
-import {ICONS} from '~/assets'
+import {DataItem, DataSkill} from '@/data'
+import {ICONS} from '@/assets'
 
 export type ListItemProps = {
   data: DataItem

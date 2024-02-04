@@ -14,7 +14,6 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     'react/react-in-jsx-scope': 'off',
-    'import/no-unresolved': 'error',
     'import/order': [
       'error',
       {
@@ -29,7 +28,7 @@ module.exports = {
         ],
         pathGroups: [
           {
-            pattern: '~/**',
+            pattern: '@/**',
             group: 'internal',
             position: 'before',
           },

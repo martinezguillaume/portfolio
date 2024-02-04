@@ -13,10 +13,10 @@ import {
   TabViewProps,
   ColorModeFab,
   Background,
-} from '~/components'
-import {data, DataItem} from '~/data'
-import {useValues} from '~/hooks'
-import {i18n} from '~/i18n'
+} from '@/components'
+import {data, DataItem} from '@/data'
+import {useValues} from '@/hooks'
+import {i18n} from '@/i18n'
 
 export default function Home(): ReactElement {
   const theme = useTheme()

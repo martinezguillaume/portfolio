@@ -24,8 +24,8 @@ import {
   TabBar as RNTabBar,
 } from 'react-native-tab-view'
 
-import {DataItem} from '~/data'
-import {useValues} from '~/hooks'
+import {DataItem} from '@/data'
+import {useValues} from '@/hooks'
 
 import {Background} from './Background'
 

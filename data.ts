@@ -42,7 +42,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: dayjs().format('YYYY-MM-DD'),
       description:
         "Maintenance de l'application mobile\nAjouts de fonctionnalités\nMises à jour régulière des librairies dépendantes\nBugfix et optimisations diverses\nCI et automatisation de déploiements",
-      pictures: [require('~/assets/images/elium-4.jpeg')],
+      pictures: [require('@/assets/images/elium-4.jpeg')],
       skills: ['react-native', 'swift', 'kotlin', 'ts', 'graphql'],
     },
     {
@@ -55,7 +55,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: dayjs().format('YYYY-MM-DD'),
       description:
         'Refactorisation du projet React-Native sous typescript\nMise en place de tests typescript / jest / e2e (detox)\nMise en place de CI\nAjouts de fonctionnalités pour l’application mobile',
-      pictures: [require('~/assets/images/faks-4.png')],
+      pictures: [require('@/assets/images/faks-4.png')],
       skills: ['react-native', 'expo', 'ts'],
     },
     {
@@ -80,7 +80,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: '2019-08-01',
       description:
         'Développement de multiples applications mobiles et applications web en react et react-native.\nCréation UI & UX pour certains projets.',
-      pictures: [require('~/assets/images/totem-1.webp')],
+      pictures: [require('@/assets/images/totem-1.webp')],
       skills: ['react-native', 'ts', 'graphql', 'aws'],
     },
     {
@@ -102,7 +102,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
         'https://pbs.twimg.com/profile_images/1199614550200475648/8RhJUPqy_400x400.jpg',
       description:
         "Titre d'ingénieurie en informatique obtenu en 3 ans en tant qu'alternant au sein de l'EPITA.",
-      pictures: [require('~/assets/images/school-epita.jpg')],
+      pictures: [require('@/assets/images/school-epita.jpg')],
       title: 'EPITA',
       skills: ['react-native', 'expo', 'js', 'kotlin', 'swift'],
       subtitle: 'Expert en Ingénierie Informatique',
@@ -121,7 +121,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       endDate: '2016-06-01',
       description:
         "Obtention de mon diplôme de DUT Informatique au sein de l'IUT d'Orsay sur 2 ans.",
-      pictures: [require('~/assets/images/iut-orsay.jpg')],
+      pictures: [require('@/assets/images/iut-orsay.jpg')],
       skills: ['html', 'css', 'js', 'objective-c', 'java'],
     },
   ],
@@ -137,9 +137,9 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
         'Elium est une solution de partage de connaissances pour les entreprises. Il permet aux équipes et aux départements de capturer, créer, organiser et partager facilement le contenu critique autrement perdu au sein de disques partagés et de tchat.',
       skills: ['react-native', 'ts', 'kotlin', 'swift', 'graphql'],
       pictures: [
-        require('~/assets/images/elium-1.webp'),
-        require('~/assets/images/elium-2.webp'),
-        require('~/assets/images/elium-3.webp'),
+        require('@/assets/images/elium-1.webp'),
+        require('@/assets/images/elium-2.webp'),
+        require('@/assets/images/elium-3.webp'),
       ],
     },
     {
@@ -153,9 +153,9 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
         'Faks, c’est l’application qui met en relation les professionnels de la pharmacie : pharmacies, groupements et laboratoires. Faks centralise tous vos échanges avec vos laboratoires, délégués, groupements. Suivre vos demandes et déléguer à votre équipe devient extrêmement simple.',
       skills: ['react-native', 'expo', 'ts'],
       pictures: [
-        require('~/assets/images/faks-1.webp'),
-        require('~/assets/images/faks-2.webp'),
-        require('~/assets/images/faks-3.webp'),
+        require('@/assets/images/faks-1.webp'),
+        require('@/assets/images/faks-2.webp'),
+        require('@/assets/images/faks-3.webp'),
       ],
     },
     {
@@ -164,8 +164,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       title: 'Milinus',
       subtitle: 'Développeur React Native',
       pictures: [
-        require('~/assets/images/milinus-1.png'),
-        require('~/assets/images/milinus-2.png'),
+        require('@/assets/images/milinus-1.png'),
+        require('@/assets/images/milinus-2.png'),
       ],
       startDate: '2020-12-01',
       description:
@@ -178,8 +178,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       title: 'GoodBet',
       subtitle: 'Développeur React Native',
       pictures: [
-        require('~/assets/images/goodbet-1.png'),
-        require('~/assets/images/goodbet-2.png'),
+        require('@/assets/images/goodbet-1.png'),
+        require('@/assets/images/goodbet-2.png'),
       ],
       startDate: '2020-03-01',
       description:
@@ -192,8 +192,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       title: 'Nobel Game',
       subtitle: 'Développeur React Native',
       pictures: [
-        require('~/assets/images/nobel-game-1.png'),
-        require('~/assets/images/nobel-game-2.png'),
+        require('@/assets/images/nobel-game-1.png'),
+        require('@/assets/images/nobel-game-2.png'),
       ],
       startDate: '2019-12-01',
       description:
@@ -206,9 +206,9 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       title: 'Tamers',
       subtitle: 'Développeur React Native',
       pictures: [
-        require('~/assets/images/tamers-1.png'),
-        require('~/assets/images/tamers-2.png'),
-        require('~/assets/images/tamers-3.png'),
+        require('@/assets/images/tamers-1.png'),
+        require('@/assets/images/tamers-2.png'),
+        require('@/assets/images/tamers-3.png'),
       ],
       startDate: '2019-04-01',
       description:
@@ -223,7 +223,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       description:
         "3ème place du Challenge Design4Green. Réalisation d'un site web de formulaire en ligne en 48h.",
       subtitle: 'Développeur Full Stack',
-      pictures: [require('~/assets/images/design4green-1.jpeg')],
+      pictures: [require('@/assets/images/design4green-1.jpeg')],
       skills: ['react', 'aws'],
     },
     {
@@ -232,8 +232,8 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       title: 'Safety Olympics - Sodexo',
       subtitle: 'Développeur React',
       pictures: [
-        require('~/assets/images/safety-olympics-sodexo-1.png'),
-        require('~/assets/images/safety-olympics-sodexo-2.png'),
+        require('@/assets/images/safety-olympics-sodexo-1.png'),
+        require('@/assets/images/safety-olympics-sodexo-2.png'),
       ],
       startDate: '2018-11-01',
       description:
