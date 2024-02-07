@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-css-interop/dist/runtime/components/rendering.js b/node_modules/react-native-css-interop/dist/runtime/components/rendering.js
+index 3af22bb..304c5a0 100644
+--- a/node_modules/react-native-css-interop/dist/runtime/components/rendering.js
++++ b/node_modules/react-native-css-interop/dist/runtime/components/rendering.js
+@@ -26,7 +26,7 @@ function render(jsx, type, props, ...args) {
+             else if (styles) {
+                 styles = [...newStyles, styles];
+             }
+-            else {
++            else if (newStyles.length) {
+                 styles = newStyles;
+             }
+             props[key] = styles;

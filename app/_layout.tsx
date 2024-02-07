@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native'
 import {useAssets} from 'expo-asset'
-import {useFonts} from 'expo-font'
+import {loadAsync, useFonts} from 'expo-font'
 import {Slot, SplashScreen} from 'expo-router'
 import * as SystemUI from 'expo-system-ui'
 import {
@@ -11,11 +11,16 @@ import {
   useColorMode,
   useColorModeValue,
 } from 'native-base'
-import {useEffect} from 'react'
+import {ReactNode, useEffect} from 'react'
+import Ionicons from '@expo/vector-icons/Ionicons'
+import {useColorScheme} from 'nativewind'
+import {View} from 'react-native'
 
-import {ICONS, IMAGES} from '@/assets'
 import {useAppStore} from '@/store'
+import {ICONS, IMAGES} from '@/assets'
 import {theme} from '@/theme'
+import {ThemeName, themes} from '@/themes'
+import '../global.css'
 
 // Native Base config
 const colorModeManager: StorageManager = {
@@ -46,7 +51,10 @@ const config: INativebaseConfig = {
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({})
+  const [fontsLoaded, error] = useFonts({
+    ...Ionicons.font,
+  })
+
   const [assets] = useAssets([
     ...Object.values(IMAGES),
     ...Object.values(ICONS),
@@ -60,16 +68,26 @@ export default function RootLayout() {
   }, [error])
 
   useEffect(() => {
-    if (loaded && assets) {
+    loadAsync(Ionicons.font)
+    if (fontsLoaded && assets) {
       SplashScreen.hideAsync()
     }
-  }, [assets, loaded])
+  }, [assets, fontsLoaded])
 
-  if (!loaded) {
+  if (!fontsLoaded || !assets) {
     return null
   }
 
   return <RootLayoutNav />
+}
+
+function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
+  const {colorScheme} = useColorScheme()
+  return (
+    <View className="flex-1" style={themes[name][colorScheme]}>
+      {children}
+    </View>
+  )
 }
 
 function RootLayoutNav() {
@@ -85,10 +103,12 @@ function RootLayoutNav() {
   }, [backgroundColor])
 
   return (
-    <ThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
-      <NativeBaseProvider colorModeManager={colorModeManager} config={config}>
-        <Slot key={locale} />
-      </NativeBaseProvider>
-    </ThemeProvider>
+    <Theme name="twitter">
+      <ThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
+        <NativeBaseProvider colorModeManager={colorModeManager} config={config}>
+          <Slot key={locale} />
+        </NativeBaseProvider>
+      </ThemeProvider>
+    </Theme>
   )
 }
