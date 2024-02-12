@@ -18,9 +18,6 @@ cssInterop(MaterialCommunityIcons, {
 cssInterop(Image, {
   className: {
     target: 'style',
-  },
-  tintClassName: {
-    target: false,
     nativeStyleToProp: {
       color: 'tintColor',
     },
