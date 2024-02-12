@@ -10,8 +10,8 @@
     "web": "expo start --web",
     "test": "tsc && bun run lint",
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
-    "deploy": "gh-pages -d dist",
-    "predeploy": "npx expo export:web",
+    "predeploy": "expo export -p web",
+    "deploy": "gh-pages -t -d dist",
     "postinstall": "patch-package"
   },
   "dependencies": {
