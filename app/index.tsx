@@ -35,7 +35,7 @@ export default function Home(): ReactElement {
     <>
       <Background />
 
-      <View className="flex-1 max-w-screen-sm web:sm:self-center web:border-x border-divider">
+      <View className="flex-1 max-w-screen-sm web:sm:self-center sm:border-x border-divider">
         <Header scrollY={scrollY} />
 
         <TabView
@@ -48,8 +48,8 @@ export default function Home(): ReactElement {
         <ColorModeFab />
       </View>
 
-      <View className="md:absolute bottom-0 right-0 border-t sm:border border-divider bg-background">
-        <Text className="!text-[8px] font-bold text-center px-1">
+      <View className="sm:absolute bottom-0 right-0 border-t sm:border-x sm:border border-divider sm:bg-background">
+        <Text className="!text-[8px] font-bold text-center p-1 leading-none">
           Cette app est cross-platform (iOS + Android + Web) ❤️
         </Text>
       </View>

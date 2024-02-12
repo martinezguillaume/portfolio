@@ -1,9 +1,9 @@
 import {useMemo} from 'react'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-export const HEADER_HEIGHT = 160
+export const HEADER_HEIGHT = 140
 export const HEADER_HEIGHT_SMALL = 80
-export const AVATAR_HEIGHT = 140
+export const AVATAR_HEIGHT = 120
 export const AVATAR_HEIGHT_SMALL = 80
 
 export const useValues = () => {

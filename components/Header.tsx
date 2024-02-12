@@ -34,7 +34,7 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
 
   const headerStyle = useAnimatedStyle(() => {
     return {
-      zIndex: scrollY.value < headerOffset ? -1 : 1,
+      zIndex: scrollY.value < headerOffset ? 0 : 20,
       height: interpolate(
         scrollY.value,
         [0, headerHeight - smallHeaderHeight],
@@ -101,7 +101,10 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
   })
 
   return (
-    <Animated.View className="absolute left-0 right-0" style={headerStyle}>
+    <Animated.View
+      pointerEvents="none"
+      className="absolute left-0 right-0"
+      style={headerStyle}>
       <Image
         className="flex-1 !w-full"
         alt="cover"
