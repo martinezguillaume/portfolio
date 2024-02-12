@@ -1,6 +1,6 @@
 export const IMAGES = {
   cover: require('./cover.webp'),
-  avatar: require('./avatar.webp'),
+  avatar: require('./avatar.jpeg'),
   totem: require('./totem.webp'),
   t2m: require('./t2m.jpg'),
   faks: require('./faks.webp'),
