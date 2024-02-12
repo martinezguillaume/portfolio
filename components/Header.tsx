@@ -103,7 +103,7 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
   return (
     <Animated.View className="absolute left-0 right-0" style={headerStyle}>
       <Image
-        className="flex-1 w-full"
+        className="flex-1 !w-full"
         alt="cover"
         source={IMAGES.cover}
         resizeMode="cover"
@@ -119,10 +119,11 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
         style={{paddingTop: insets.top}}
         tint={colorScheme || undefined}
         animatedProps={blurViewProps}>
-        <Animated.View style={headerContentStyle}>
-          <View className="flex-row items-center">
+        {/* eslint-disable-next-line react-native/no-inline-styles */}
+        <Animated.View style={[{flex: 1}, headerContentStyle]}>
+          <View className="flex-1 flex-row items-center justify-center">
             <Image
-              className="border-2 border-background-contrast size-20 rounded-full"
+              className="border-2 border-background-contrast !size-16 rounded-full"
               source={IMAGES.avatar}
             />
             <View className="ml-2">

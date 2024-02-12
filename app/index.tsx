@@ -35,7 +35,7 @@ export default function Home(): ReactElement {
     <>
       <Background />
 
-      <View className="flex-1 max-w-screen-sm web:self-center web:border-x border-divider">
+      <View className="flex-1 max-w-screen-sm web:sm:self-center web:border-x border-divider">
         <Header scrollY={scrollY} />
 
         <TabView

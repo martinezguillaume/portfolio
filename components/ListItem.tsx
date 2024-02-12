@@ -104,7 +104,7 @@ export const ListItem = memo<ListItemProps>(
     return (
       <View className="flex-row px-4 py-2 gap-2">
         <Image
-          className="size-16 rounded-full"
+          className="!size-16 rounded-full"
           source={typeof avatar === 'string' ? {uri: avatar} : avatar}
         />
 
@@ -125,7 +125,7 @@ export const ListItem = memo<ListItemProps>(
                 <Image
                   key={picture}
                   alt="item-picture"
-                  className="h-full flex-1"
+                  className="!h-full flex-1"
                   source={picture}
                 />
               ))}
@@ -142,7 +142,7 @@ export const ListItem = memo<ListItemProps>(
                       key={skill}
                       resizeMode="contain"
                       {...icon}
-                      className={`size-4 color-secondary ${icon.className}`}
+                      className={`!size-4 color-secondary ${icon.className}`}
                     />
                   )
                 } else {
@@ -150,7 +150,7 @@ export const ListItem = memo<ListItemProps>(
                     <Icon
                       key={skill}
                       {...icon}
-                      className={`text-secondary text-xl ${icon.className}`}
+                      className={`text-secondary ${icon.className} !text-xl`}
                     />
                   )
                 }
@@ -158,7 +158,7 @@ export const ListItem = memo<ListItemProps>(
             </View>
           )}
 
-          <View className="flex-row flex-wrap gap-2">
+          <View className="flex-row flex-wrap gap-2 items-center">
             {location && (
               <Text className="text-secondary text-sm">
                 <Icon className="text-secondary" name="map-pin" /> {location}

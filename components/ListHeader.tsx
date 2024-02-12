@@ -107,9 +107,9 @@ export const ListHeader = ({scrollY}: ListHeaderProps) => {
                   : undefined
               }
               className={`${
-                item.link ? 'text-primary' : 'text-secondary'
+                item.link ? 'text-primary-primary' : 'text-secondary'
               } text-sm`}>
-              <Icon className="text-lg text-secondary" {...item.icon} />{' '}
+              <Icon className="!text-lg text-secondary" {...item.icon} />{' '}
               {item.description}
             </Text>
           </View>
