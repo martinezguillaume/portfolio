@@ -7,13 +7,14 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import {DarkTheme, DefaultTheme} from '@react-navigation/native'
-import {useColorScheme} from 'nativewind'
+
+import {useColorSchemeStore} from '@/stores'
 
 type Props = ViewProps
 
 export const Background = memo<Props>(({className, style, ...props}) => {
-  const {colorScheme} = useColorScheme()
-  const colorProgress = useSharedValue(0)
+  const {colorScheme} = useColorSchemeStore()
+  const colorProgress = useSharedValue(colorScheme === 'light' ? 0 : 1)
 
   useEffect(() => {
     colorProgress.value = withTiming(colorScheme === 'light' ? 0 : 1)

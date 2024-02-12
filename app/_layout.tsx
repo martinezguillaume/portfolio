@@ -5,10 +5,9 @@ import {Slot, SplashScreen} from 'expo-router'
 import {ReactNode, useEffect} from 'react'
 import Feather from '@expo/vector-icons/Feather'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import {useColorScheme} from 'nativewind'
 import {View} from 'react-native'
 
-import {useAppStore} from '@/store'
+import {useColorSchemeStore, useLocalStore} from '@/stores'
 import {ICONS, IMAGES} from '@/assets'
 import {ThemeName, themes} from '@/themes'
 import '../global.css'
@@ -53,7 +52,7 @@ export default function RootLayout() {
 }
 
 function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
-  const {colorScheme} = useColorScheme()
+  const {colorScheme} = useColorSchemeStore()
   return (
     <View className="flex-1" style={themes[name][colorScheme]}>
       {children}
@@ -62,8 +61,8 @@ function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
 }
 
 function RootLayoutNav() {
-  const locale = useAppStore(state => state.locale)
-  const {colorScheme} = useColorScheme()
+  const locale = useLocalStore(state => state.locale)
+  const {colorScheme} = useColorSchemeStore()
 
   return (
     <Theme name="twitter">

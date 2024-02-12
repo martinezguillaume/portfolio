@@ -1,10 +1,11 @@
 import {memo} from 'react'
-import {useColorScheme} from 'nativewind'
+
+import {useColorSchemeStore} from '@/stores'
 
 import {Fab} from './base'
 
 export const ColorModeFab = memo(() => {
-  const {toggleColorScheme, colorScheme} = useColorScheme()
+  const {toggleColorScheme, colorScheme} = useColorSchemeStore()
 
   return (
     <Fab onPress={toggleColorScheme}>

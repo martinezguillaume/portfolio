@@ -9,11 +9,11 @@ import Animated, {
 } from 'react-native-reanimated'
 import {BlurView, BlurViewProps} from 'expo-blur'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
-import {useColorScheme} from 'nativewind'
 
 import {i18n} from '@/i18n'
 import {IMAGES} from '@/assets'
 import {useValues} from '@/hooks'
+import {useColorSchemeStore} from '@/stores'
 
 import {Text} from './base'
 
@@ -24,7 +24,7 @@ export type HeaderProps = {
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
 
 export const Header = memo<HeaderProps>(({scrollY}) => {
-  const {colorScheme} = useColorScheme()
+  const {colorScheme} = useColorSchemeStore()
   const insets = useSafeAreaInsets()
 
   const {headerHeight, smallHeaderHeight, headerOffset, smallAvatarHeight} =
