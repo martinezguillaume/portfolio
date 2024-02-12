@@ -1,32 +1,24 @@
-import {useBreakpointValue} from 'native-base'
 import {useMemo} from 'react'
-import {Dimensions} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-export const COVER_HEIGHT = 160
-export const COVER_HEIGHT_SMALL = 80
-export const AVATAR_SIZE = 160
-export const AVATAR_SIZE_SMALL = 100
+export const HEADER_HEIGHT = 140
+export const HEADER_HEIGHT_SMALL = 80
+export const AVATAR_HEIGHT = 120
+export const AVATAR_HEIGHT_SMALL = 80
 
 export const useValues = () => {
   const insets = useSafeAreaInsets()
-  const appWidth = useBreakpointValue({
-    base: Dimensions.get('window').width,
-    md: 600,
-  })
 
   return useMemo(
     () => ({
-      coverHeight: insets.top + COVER_HEIGHT,
-      smallCoverHeight: insets.top + COVER_HEIGHT_SMALL,
-      avatarSize: AVATAR_SIZE,
-      smallAvatarSize: AVATAR_SIZE_SMALL,
-      headerOffset: COVER_HEIGHT - COVER_HEIGHT_SMALL,
-      avatarOffset: AVATAR_SIZE - AVATAR_SIZE_SMALL,
-      tabBarHeight: 48,
+      headerHeight: insets.top + HEADER_HEIGHT,
+      smallHeaderHeight: insets.top + HEADER_HEIGHT_SMALL,
+      avatarHeight: AVATAR_HEIGHT,
+      smallAvatarHeight: AVATAR_HEIGHT_SMALL,
+      headerOffset: HEADER_HEIGHT - HEADER_HEIGHT_SMALL,
+      avatarOffset: AVATAR_HEIGHT - AVATAR_HEIGHT_SMALL,
       insets,
-      appWidth: appWidth,
     }),
-    [appWidth, insets],
+    [insets],
   )
 }

@@ -1,6 +1,5 @@
 import {memo, useEffect} from 'react'
-import {StyleSheet} from 'react-native'
-import {Box, useColorMode} from 'native-base'
+import {ViewProps} from 'react-native'
 import Animated, {
   interpolateColor,
   useAnimatedStyle,
@@ -9,17 +8,17 @@ import Animated, {
 } from 'react-native-reanimated'
 import {DarkTheme, DefaultTheme} from '@react-navigation/native'
 
-const AnimatedBox = Animated.createAnimatedComponent(Box)
+import {useColorSchemeStore} from '@/stores'
 
-type Props = {}
+type Props = ViewProps
 
-export const Background = memo<Props>(() => {
-  const {colorMode} = useColorMode()
-  const colorProgress = useSharedValue(0)
+export const Background = memo<Props>(({className, style, ...props}) => {
+  const {colorScheme} = useColorSchemeStore()
+  const colorProgress = useSharedValue(colorScheme === 'light' ? 0 : 1)
 
   useEffect(() => {
-    colorProgress.value = withTiming(colorMode === 'light' ? 0 : 1)
-  }, [colorMode, colorProgress])
+    colorProgress.value = withTiming(colorScheme === 'light' ? 0 : 1)
+  }, [colorProgress, colorScheme])
 
   const contentStyle = useAnimatedStyle(() => {
     return {
@@ -31,14 +30,11 @@ export const Background = memo<Props>(() => {
     }
   })
 
-  return <AnimatedBox style={[styles.content, contentStyle]} flex={1} />
-})
-
-const styles = StyleSheet.create({
-  gradient: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  content: {
-    ...StyleSheet.absoluteFillObject,
-  },
+  return (
+    <Animated.View
+      className={`flex-1 absolute top-0 bottom-0 left-0 right-0 ${className}`}
+      style={[contentStyle, style]}
+      {...props}
+    />
+  )
 })

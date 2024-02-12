@@ -1,18 +1,11 @@
-import {
-  Avatar,
-  Column,
-  Icon,
-  IIconProps,
-  Image,
-  Row,
-  Text,
-  IImageProps,
-} from 'native-base'
 import {memo} from 'react'
 import dayjs from 'dayjs'
+import {ImageProps, View, Image} from 'react-native'
 
 import {DataItem, DataSkill} from '@/data'
 import {ICONS} from '@/assets'
+
+import {Icon, IconProps, Text} from './base'
 
 export type ListItemProps = {
   data: DataItem
@@ -20,65 +13,77 @@ export type ListItemProps = {
 
 const skillIcon: Record<
   DataSkill,
-  ({type?: 'icon'} & IIconProps) | ({type: 'image'} & IImageProps)
+  ({as?: 'icon'} & IconProps) | ({as: 'image'} & ImageProps)
 > = {
   react: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'react',
   },
   aws: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'aws',
+    className: 'text-2xl',
   },
   html: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-html5',
   },
   css: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-css3',
   },
   js: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-javascript',
   },
   ts: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-typescript',
   },
   graphql: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'graphql',
   },
   'react-native': {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'react',
   },
   java: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-java',
-    size: 6,
+    className: 'text-2xl',
   },
   kotlin: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-kotlin',
-    size: 5,
+    className: '!text-lg',
   },
   swift: {
-    // as: MaterialCommunityIcons,
+    as: 'icon',
+    type: 'material-community-icons',
     name: 'language-swift',
   },
   'objective-c': {
-    type: 'image',
+    as: 'image',
     source: ICONS['objective-c'],
     alt: 'objective-c',
-    size: 6,
+    className: 'size-6',
   },
   expo: {
-    type: 'image',
+    as: 'image',
     source: ICONS.expo,
     alt: 'expo',
-    px: 1,
+    className: 'mx-[1]',
   },
 }
 
@@ -97,13 +102,16 @@ export const ListItem = memo<ListItemProps>(
     },
   }) => {
     return (
-      <Row px={4} py={2} space={2}>
-        <Avatar source={typeof avatar === 'string' ? {uri: avatar} : avatar} />
+      <View className="flex-row px-4 py-2 gap-2">
+        <Image
+          className="!size-16 rounded-full"
+          source={typeof avatar === 'string' ? {uri: avatar} : avatar}
+        />
 
-        <Column flex={1} space={2}>
-          <Text fontWeight={800} fontSize={15}>
+        <View className="flex-1 gap-2">
+          <Text className="font-bold">
             {title}
-            <Text fontWeight={400} color="muted.500">
+            <Text className="font-normal text-secondary">
               {' · '}
               {subtitle}
             </Text>
@@ -112,65 +120,59 @@ export const ListItem = memo<ListItemProps>(
           {description && <Text>{description}</Text>}
 
           {pictures && (
-            <Row
-              height={250}
-              width="100%"
-              borderRadius={12}
-              overflow="hidden"
-              space={0.5}
-              borderWidth={1}>
+            <View className="flex-row w-full h-64 rounded-xl gap-0.5 overflow-hidden border-[1px] border-divider">
               {pictures.map(picture => (
                 <Image
                   key={picture}
                   alt="item-picture"
-                  height="100%"
-                  flex={1}
+                  className="!h-full flex-1"
                   source={picture}
                 />
               ))}
-            </Row>
+            </View>
           )}
 
           {skills && (
-            <Row alignItems="center">
+            <View className="flex-row items-center">
               {skills.map(skill => {
                 const icon = skillIcon[skill]
-                if (icon.type === 'image') {
+                if (icon.as === 'image') {
                   return (
                     <Image
                       key={skill}
-                      tintColor="muted.500"
-                      size={4}
                       resizeMode="contain"
                       {...icon}
+                      className={`!size-4 color-secondary ${icon.className}`}
                     />
                   )
                 } else {
                   return (
-                    <Icon key={skill} color="muted.500" size={5} {...icon} />
+                    <Icon
+                      key={skill}
+                      {...icon}
+                      className={`text-secondary ${icon.className} !text-xl`}
+                    />
                   )
                 }
               })}
-            </Row>
+            </View>
           )}
 
-          <Row space={2} flexWrap="wrap" alignItems="center">
+          <View className="flex-row flex-wrap gap-2 items-center">
             {location && (
-              <Text color="muted.500">
-                {/* FIXME: add an icon */}
-                <Icon color="muted.500" size={4} name="map-pin" /> {location}
+              <Text className="text-secondary text-sm">
+                <Icon className="text-secondary" name="map-pin" /> {location}
               </Text>
             )}
 
-            <Text color="muted.500">
-              {/* FIXME: add an icon */}
-              <Icon color="muted.500" size={4} name="calendar" />{' '}
+            <Text className="color-secondary text-sm">
+              <Icon className="color-secondary" name="calendar" />{' '}
               {dayjs(startDate).format(!endDate ? 'MMMM YYYY' : 'MMM YYYY')}
               {endDate && ` - ${dayjs(endDate).format('MMM YYYY')}`}
             </Text>
-          </Row>
-        </Column>
-      </Row>
+          </View>
+        </View>
+      </View>
     )
   },
 )

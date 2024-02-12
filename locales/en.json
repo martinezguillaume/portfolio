@@ -4,9 +4,11 @@
     "developerDescription": "Developer since September 2016",
     "locationDescription": "Paris, France",
     "birthdayDescription": "Born August 1, 1996",
-    "title": "Mobile Developer - React-Native Expert",
+    "title": "📱Mobile Developer - React-Native Expert",
     "projects": "Projects",
     "experiences": "Experiences",
-    "language": "Language"
+    "language": "Language",
+    "seeMore": "See more",
+    "seeLess": "See less"
   }
 }

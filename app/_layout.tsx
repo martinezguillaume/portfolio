@@ -1,80 +1,56 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native'
-import {useAssets} from 'expo-asset'
-import {loadAsync, useFonts} from 'expo-font'
-import {Slot, SplashScreen} from 'expo-router'
-import * as SystemUI from 'expo-system-ui'
 import {
-  INativebaseConfig,
-  NativeBaseProvider,
-  StorageManager,
-  useColorMode,
-  useColorModeValue,
-} from 'native-base'
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+  useTheme,
+} from '@react-navigation/native'
+import {useAssets} from 'expo-asset'
+import {useFonts} from 'expo-font'
+import {Slot, SplashScreen} from 'expo-router'
 import {ReactNode, useEffect} from 'react'
-import Ionicons from '@expo/vector-icons/Ionicons'
-import {useColorScheme} from 'nativewind'
+import * as SystemUI from 'expo-system-ui'
+import Feather from '@expo/vector-icons/Feather'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import {View} from 'react-native'
 
-import {useAppStore} from '@/store'
+import {useColorSchemeStore, useLocalStore} from '@/stores'
 import {ICONS, IMAGES} from '@/assets'
-import {theme} from '@/theme'
 import {ThemeName, themes} from '@/themes'
 import '../global.css'
-
-// Native Base config
-const colorModeManager: StorageManager = {
-  get: async () => {
-    try {
-      const val = await AsyncStorage.getItem('@color-mode')
-      return val === 'dark' ? 'dark' : 'light'
-    } catch (e) {
-      return 'dark'
-    }
-  },
-  set: async value => {
-    try {
-      if (value) {
-        await AsyncStorage.setItem('@color-mode', value)
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  },
-}
-const config: INativebaseConfig = {
-  strictMode: 'error',
-  theme,
-}
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const [fontsLoaded, error] = useFonts({
-    ...Ionicons.font,
+  const [fontsLoaded, fontsError] = useFonts({
+    ...Feather.font,
+    ...MaterialCommunityIcons.font,
   })
 
-  const [assets] = useAssets([
+  const [assets, assetsError] = useAssets([
     ...Object.values(IMAGES),
     ...Object.values(ICONS),
   ])
 
+  const isLoading = !fontsLoaded || !assets
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
-    if (error) {
-      throw error
+    if (assetsError) {
+      throw assetsError
     }
-  }, [error])
+    if (fontsError) {
+      throw fontsError
+    }
+  }, [assetsError, fontsError])
 
   useEffect(() => {
-    loadAsync(Ionicons.font)
-    if (fontsLoaded && assets) {
+    if (!isLoading) {
       SplashScreen.hideAsync()
     }
-  }, [assets, fontsLoaded])
+  }, [isLoading])
 
-  if (!fontsLoaded || !assets) {
+  if (isLoading) {
     return null
   }
 
@@ -82,7 +58,13 @@ export default function RootLayout() {
 }
 
 function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
-  const {colorScheme} = useColorScheme()
+  const {colorScheme} = useColorSchemeStore()
+  const {colors} = useTheme()
+
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(colors.background)
+  }, [colorScheme, colors.background])
+
   return (
     <View className="flex-1" style={themes[name][colorScheme]}>
       {children}
@@ -91,24 +73,14 @@ function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
 }
 
 function RootLayoutNav() {
-  const locale = useAppStore(state => state.locale)
-  const {colorMode} = useColorMode()
-  const backgroundColor = useColorModeValue(
-    DefaultTheme.colors.background,
-    DarkTheme.colors.background,
-  )
-
-  useEffect(() => {
-    SystemUI.setBackgroundColorAsync(backgroundColor)
-  }, [backgroundColor])
+  const locale = useLocalStore(state => state.locale)
+  const {colorScheme} = useColorSchemeStore()
 
   return (
-    <Theme name="twitter">
-      <ThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
-        <NativeBaseProvider colorModeManager={colorModeManager} config={config}>
-          <Slot key={locale} />
-        </NativeBaseProvider>
-      </ThemeProvider>
-    </Theme>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Theme name="twitter">
+        <Slot key={locale} />
+      </Theme>
+    </ThemeProvider>
   )
 }
