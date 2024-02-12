@@ -1,55 +1,44 @@
-import {
-  Avatar,
-  Box,
-  Icon,
-  Image,
-  Row,
-  Text,
-  useColorMode,
-  useColorModeValue,
-} from 'native-base'
-import {memo, useMemo} from 'react'
-import {StyleSheet, Platform, LayoutChangeEvent} from 'react-native'
+import {memo} from 'react'
+import {Image, Platform, View} from 'react-native'
 import Animated, {
   Extrapolation,
+  SharedValue,
   interpolate,
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import {BlurView, BlurViewProps} from 'expo-blur'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import {useColorScheme} from 'nativewind'
 
 import {i18n} from '@/i18n'
 import {IMAGES} from '@/assets'
 import {useValues} from '@/hooks'
 
+import {Text} from './base'
+
 export type HeaderProps = {
-  scrollY: Animated.SharedValue<number>
-  onLayout: (event: LayoutChangeEvent) => void
+  scrollY: SharedValue<number>
 }
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
 
-export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
-  const {colorMode} = useColorMode()
+export const Header = memo<HeaderProps>(({scrollY}) => {
+  const {colorScheme} = useColorScheme()
   const insets = useSafeAreaInsets()
-  const backgroundColor = useColorModeValue('white', 'black')
 
-  const {
-    headerOffset,
-    coverHeight,
-    smallCoverHeight,
-    avatarSize,
-    smallAvatarSize,
-    avatarOffset,
-  } = useValues()
+  const {headerHeight, smallHeaderHeight, headerOffset, smallAvatarHeight} =
+    useValues()
 
-  const coverStyle = useAnimatedStyle(() => {
+  const headerThreshold = headerOffset + smallAvatarHeight / 2
+
+  const headerStyle = useAnimatedStyle(() => {
     return {
+      zIndex: scrollY.value < headerOffset ? -1 : 1,
       height: interpolate(
         scrollY.value,
-        [0, headerOffset],
-        [coverHeight, smallCoverHeight],
+        [0, headerHeight - smallHeaderHeight],
+        [headerHeight, smallHeaderHeight],
         {
           extrapolateRight: Extrapolation.CLAMP,
         },
@@ -57,66 +46,18 @@ export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
     }
   })
 
-  const avatarStyle = useAnimatedStyle(() => {
-    const size = interpolate(
-      scrollY.value,
-      [0, headerOffset],
-      [avatarSize, smallAvatarSize],
-      {
-        extrapolateRight: Extrapolation.CLAMP,
-        extrapolateLeft: Extrapolation.CLAMP,
-      },
-    )
-    return {
-      height: size,
-      width: size,
-      marginTop: interpolate(
-        scrollY.value,
-        [0, headerOffset],
-        [0, avatarOffset],
-        {
-          extrapolateLeft: Extrapolation.CLAMP,
-          extrapolateRight: Extrapolation.CLAMP,
-        },
-      ),
-    }
-  })
-
-  const blurViewProps = useAnimatedProps<BlurViewProps>(() => {
-    return {
-      intensity:
-        Platform.OS !== 'ios'
-          ? 0
-          : interpolate(
-              scrollY.value,
-              [
-                headerOffset + smallAvatarSize,
-                headerOffset + smallAvatarSize + 50,
-              ],
-              [0, 50],
-              {
-                extrapolateLeft: Extrapolation.CLAMP,
-                extrapolateRight: Extrapolation.CLAMP,
-              },
-            ),
-    }
-  })
-
-  const coverContentStyle = useAnimatedStyle(() => {
+  const headerContentStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
         scrollY.value,
-        [headerOffset + smallAvatarSize, headerOffset + smallAvatarSize + 50],
+        [headerThreshold, headerThreshold + 50],
         [0, 1],
       ),
       transform: [
         {
           translateY: interpolate(
             scrollY.value,
-            [
-              headerOffset + smallAvatarSize,
-              headerOffset + smallAvatarSize + 50,
-            ],
+            [headerThreshold, headerThreshold + 50],
             [50, 0],
             {
               extrapolateLeft: Extrapolation.CLAMP,
@@ -128,149 +69,69 @@ export const Header = memo<HeaderProps>(({scrollY, onLayout}) => {
     }
   })
 
-  const coverOverlayStyle = useAnimatedStyle(() => {
+  const blurViewProps = useAnimatedProps<BlurViewProps>(() => {
+    return {
+      intensity:
+        Platform.OS !== 'ios'
+          ? 0
+          : interpolate(
+              scrollY.value,
+              [headerThreshold, headerThreshold + 50],
+              [0, 50],
+              {
+                extrapolateLeft: Extrapolation.CLAMP,
+                extrapolateRight: Extrapolation.CLAMP,
+              },
+            ),
+    }
+  })
+
+  const headerOverlayStyle = useAnimatedStyle(() => {
     return {
       opacity:
         Platform.OS === 'ios'
           ? 0
           : interpolate(
               scrollY.value,
-              [
-                headerOffset + smallAvatarSize,
-                headerOffset + smallAvatarSize + 50,
-              ],
+              [headerThreshold, headerThreshold + 50],
               [0, 0.7],
               {extrapolateRight: Extrapolation.CLAMP},
             ),
     }
   })
 
-  const headerStyle = useAnimatedStyle(() => {
-    return {
-      zIndex: scrollY.value >= headerOffset ? 1 : 10,
-      transform: [{translateY: -scrollY.value}],
-    }
-  })
-
-  const data = useMemo<{description?: string; icon: string; link?: string}[]>(
-    () => [
-      {
-        icon: 'map-pin',
-        description: i18n.t('home.locationDescription'),
-      },
-      {
-        icon: 'gift',
-        description: i18n.t('home.birthdayDescription'),
-      },
-      // {
-      //   icon: 'github',
-      //   link: 'github.com/martinezguillaume/portfolio',
-      //   description: 'github.com',
-      // },
-      {
-        icon: 'calendar',
-        description: i18n.t('home.developerDescription'),
-      },
-    ],
-    [],
-  )
-
   return (
-    <>
-      <Animated.View style={[styles.cover, coverStyle]}>
-        <Image alt="cover" source={IMAGES.cover} flex={1} resizeMode="cover" />
-
-        <Animated.View
-          style={[styles.coverOverlay, {backgroundColor}, coverOverlayStyle]}
-        />
-
-        <AnimatedBlurView
-          style={[styles.blurView, {paddingTop: insets.top}]}
-          tint={colorMode || undefined}
-          animatedProps={blurViewProps}>
-          <Animated.View style={coverContentStyle}>
-            <Box flexDirection="row" alignItems="center">
-              <Avatar
-                source={IMAGES.avatar}
-                size="md"
-                borderWidth={1}
-                _light={{borderColor: 'black'}}
-                _dark={{borderColor: 'white'}}
-              />
-              <Box ml={2}>
-                <Text fontWeight={800}>Guillaume Martinez</Text>
-                <Text fontSize={12}>{i18n.t('home.title')}</Text>
-              </Box>
-            </Box>
-          </Animated.View>
-        </AnimatedBlurView>
-      </Animated.View>
+    <Animated.View className="absolute left-0 right-0" style={headerStyle}>
+      <Image
+        className="flex-1 w-full"
+        alt="cover"
+        source={IMAGES.cover}
+        resizeMode="cover"
+      />
 
       <Animated.View
-        onLayout={onLayout}
-        style={[
-          styles.header,
-          headerStyle,
-          {
-            paddingTop: coverHeight - avatarOffset,
-          },
-        ]}>
-        <Animated.Image
-          source={IMAGES.avatar}
-          style={[styles.avatar, {borderColor: backgroundColor}, avatarStyle]}
-        />
-        <Text fontSize={16} fontWeight={800}>
-          Guillaume Martinez
-        </Text>
-        <Text color="muted.500">{i18n.t('home.title')}</Text>
+        className="absolute inset-x-0 inset-y-0 bg-background"
+        style={headerOverlayStyle}
+      />
 
-        <Text mt={4}>{i18n.t('home.description')}</Text>
-
-        <Row flexDirection="row" flexWrap="wrap" mt={2} space={2}>
-          {data.map(item => (
-            <Text
-              color={item.link ? 'blue.500' : 'muted.500'}
-              key={item.icon}
-              fontSize={12}
-              ml={1}
-              mt={2}>
-              {/* FIXME: add an icon */}
-              <Icon color="muted.500" size={4} name={item.icon} />{' '}
-              {item.description}
-            </Text>
-          ))}
-        </Row>
-      </Animated.View>
-    </>
+      <AnimatedBlurView
+        className="absolute overflow-hidden inset-y-0 inset-x-0 items-center"
+        style={{paddingTop: insets.top}}
+        tint={colorScheme || undefined}
+        animatedProps={blurViewProps}>
+        <Animated.View style={headerContentStyle}>
+          <View className="flex-row items-center">
+            <Image
+              className="border-2 border-background-contrast size-20 rounded-full"
+              source={IMAGES.avatar}
+            />
+            <View className="ml-2">
+              <Text className="font-extrabold">Guillaume Martinez</Text>
+              <Text className="text-sm">{i18n.t('home.title')}</Text>
+            </View>
+          </View>
+        </Animated.View>
+      </AnimatedBlurView>
+    </Animated.View>
   )
-})
-
-const styles = StyleSheet.create({
-  header: {
-    pointerEvents: 'none',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    paddingHorizontal: 16,
-  },
-  blurView: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  coverOverlay: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  cover: {
-    pointerEvents: 'none',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    zIndex: 5,
-  },
-  avatar: {
-    borderRadius: 200,
-    borderWidth: 4,
-  },
 })

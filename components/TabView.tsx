@@ -1,218 +1,96 @@
-import {Box, Divider, Text, useToken} from 'native-base'
-import {
-  ReactElement,
-  ReactNode,
-  Ref,
-  useCallback,
-  useRef,
-  useState,
-} from 'react'
-import {Dimensions, Platform, ScrollViewProps, StyleSheet} from 'react-native'
 import Animated, {
-  Extrapolate,
-  interpolate,
   SharedValue,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
 } from 'react-native-reanimated'
-import {
-  NavigationState,
-  Route,
-  SceneRendererProps,
-  TabView as RNTabView,
-  TabViewProps as RNTabViewProps,
-  TabBar as RNTabBar,
-} from 'react-native-tab-view'
+import {Pressable, View, ListRenderItem} from 'react-native'
+import {useCallback, useMemo, useState} from 'react'
 
 import {DataItem} from '@/data'
 import {useValues} from '@/hooks'
 
+import {ListItem} from './ListItem'
+import {Text} from './base'
 import {Background} from './Background'
 
-const initialLayout = {width: Dimensions.get('window').width}
-const INDICATOR_WIDTH = 100
-
-export type TabViewProps<T extends Route> = Omit<
-  RNTabViewProps<T>,
-  'navigationState' | 'onIndexChange' | 'renderScene'
-> & {
-  routes: T[]
-  renderScene: (
-    props: SceneRendererProps & {
-      route: T
-      listProps: Partial<ScrollViewProps> & {
-        ref: Ref<Animated.FlatList<DataItem>>
-      }
-    },
-  ) => ReactNode
+export type TabViewProps = {
+  ListHeaderComponent: React.ReactElement
   scrollY: SharedValue<number>
-  paddingTop: number
+  routes: {key: string; title: string; data: DataItem[]}[]
 }
 
-export const TabView = <T extends Route>({
-  routes,
-  renderScene: renderSceneProps,
-  scrollY,
-  paddingTop,
-  ...props
-}: TabViewProps<T>): ReactElement => {
-  const primary = useToken('colors', 'primary')
-  const muted = useToken('colors', 'muted')
+type TabViewDataItem = DataItem | 'tab'
 
-  const {smallCoverHeight, insets, tabBarHeight, appWidth} = useValues()
+export const TabView = ({
+  routes,
+  ListHeaderComponent,
+  scrollY,
+}: TabViewProps) => {
+  const {smallHeaderHeight} = useValues()
+  const scrollHandler = useAnimatedScrollHandler(event => {
+    scrollY.value = event.contentOffset.y
+  })
   const [index, setIndex] = useState(0)
 
-  const listRef = useRef<{key: string; value: Animated.FlatList<DataItem>}[]>(
+  const currentRoute = routes[index]
+
+  const data = useMemo<TabViewDataItem[]>(
+    () => ['tab', ...currentRoute.data],
+    [currentRoute.data],
+  )
+
+  const TabBar = useMemo(
+    () => (
+      <View className="flex-row h-12">
+        <Background />
+        {routes.map((route, i) => (
+          <Pressable
+            key={route.key}
+            className="flex-1 items-center justify-center"
+            onPress={() => setIndex(i)}>
+            <View className="flex-1 justify-between">
+              <View />
+              <Text
+                className={`font-extrabold px-2 ${
+                  index === i ? 'text-primary' : 'text-secondary'
+                }`}>
+                {route.title}
+              </Text>
+              <View
+                className={`${
+                  index === i ? 'bg-primary' : ''
+                } h-1 rounded-full`}
+              />
+            </View>
+          </Pressable>
+        ))}
+      </View>
+    ),
+    [index, routes],
+  )
+
+  const getItemId = useCallback(
+    (item: TabViewDataItem) => (item === 'tab' ? item : item.id.toString()),
     [],
   )
-  const listOffset = useRef<Record<string, number>>({})
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    const y = event.contentOffset.y
-    scrollY.value = y
-    const curRoute = routes[index].key
-    listOffset.current[curRoute] = y
-  })
-  const syncScrollOffset = useCallback(() => {
-    const curRouteKey = routes[index].key
-    listRef.current.forEach(item => {
-      if (item.key !== curRouteKey) {
-        if (scrollY.value < paddingTop && scrollY.value >= 0) {
-          if (item.value) {
-            // @ts-ignore issue: https://github.com/software-mansion/react-native-reanimated/issues/3023
-            item.value.scrollToOffset({
-              offset: scrollY.value,
-              animated: false,
-            })
-            listOffset.current[item.key] = scrollY.value
-          }
-        } else if (scrollY.value >= paddingTop) {
-          if (
-            listOffset.current[item.key] < paddingTop ||
-            listOffset.current[item.key] == null
-          ) {
-            if (item.value) {
-              // @ts-ignore issue: https://github.com/software-mansion/react-native-reanimated/issues/3023
-              item.value.scrollToOffset({
-                offset: paddingTop,
-                animated: false,
-              })
-              listOffset.current[item.key] = paddingTop
-            }
-          }
-        }
-      }
-    })
-  }, [index, paddingTop, routes, scrollY.value])
-
-  const tabBarStyle = useAnimatedStyle(() => {
-    return {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      zIndex: 99,
-      transform: [
-        {
-          translateY: interpolate(
-            scrollY.value,
-            [0, paddingTop - smallCoverHeight],
-            [paddingTop, smallCoverHeight],
-            {
-              extrapolateRight: Extrapolate.CLAMP,
-            },
-          ),
-        },
-      ],
-    }
-  })
-
-  const renderTabBar = useCallback(
-    (
-      tabBarProps: SceneRendererProps & {
-        navigationState: NavigationState<T>
-      },
-    ) => (
-      <Animated.View style={tabBarStyle}>
-        <Background />
-        <Box flex={1}>
-          <RNTabBar
-            {...tabBarProps}
-            style={[styles.tabBar, {borderColor: muted['800']}]}
-            indicatorStyle={{
-              width: INDICATOR_WIDTH,
-              left: (appWidth / routes.length - INDICATOR_WIDTH) / 2,
-              backgroundColor: primary['500'],
-            }}
-            onTabPress={Platform.OS === 'web' ? syncScrollOffset : undefined}
-            renderLabel={({focused, route}) => (
-              <Box flexDirection="row" alignItems="center">
-                <Text fontWeight={800} opacity={focused ? 1 : 0.4}>
-                  {route.title}
-                </Text>
-              </Box>
-            )}
-          />
-          <Divider />
-        </Box>
-      </Animated.View>
-    ),
-    [appWidth, muted, primary, routes.length, syncScrollOffset, tabBarStyle],
+  const renderItem = useCallback<ListRenderItem<TabViewDataItem>>(
+    ({item}) => (item === 'tab' ? TabBar : <ListItem data={item} />),
+    [TabBar],
   )
-
-  const renderScene = useCallback<RNTabViewProps<T>['renderScene']>(
-    sceneProps =>
-      renderSceneProps({
-        ...sceneProps,
-        listProps: {
-          showsVerticalScrollIndicator: false,
-          contentContainerStyle: {
-            paddingTop: paddingTop + tabBarHeight,
-            paddingBottom: insets.bottom,
-          },
-          scrollEventThrottle: 16,
-          onScroll: scrollHandler,
-          onMomentumScrollEnd: syncScrollOffset,
-          onScrollEndDrag: syncScrollOffset,
-          ref: ref => {
-            if (ref) {
-              const found = listRef.current.find(
-                e => e.key === sceneProps.route.key,
-              )
-              if (!found) {
-                listRef.current.push({
-                  key: sceneProps.route.key,
-                  value: ref,
-                })
-              }
-            }
-          },
-        },
-      }),
-    [
-      insets.bottom,
-      paddingTop,
-      renderSceneProps,
-      scrollHandler,
-      syncScrollOffset,
-      tabBarHeight,
-    ],
+  const renderSeparator = useCallback(
+    () => <View className="h-px bg-divider" />,
+    [],
   )
 
   return (
-    <RNTabView
-      renderTabBar={renderTabBar}
-      initialLayout={initialLayout}
-      navigationState={{index, routes}}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-      onSwipeStart={syncScrollOffset}
-      {...props}
+    <Animated.FlatList
+      style={{marginTop: smallHeaderHeight}}
+      stickyHeaderIndices={[1]}
+      keyExtractor={getItemId}
+      data={data}
+      ListHeaderComponent={ListHeaderComponent}
+      renderItem={renderItem}
+      onScroll={scrollHandler}
+      ItemSeparatorComponent={renderSeparator}
     />
   )
 }
-
-const styles = StyleSheet.create({
-  tabBar: {
-    elevation: 0,
-    backgroundColor: 'transparent',
-  },
-})

@@ -1,26 +1,22 @@
-import {Fab, useColorMode} from 'native-base'
 import {memo} from 'react'
+import {useColorScheme} from 'nativewind'
+
+import {Fab} from './base'
 
 export const ColorModeFab = memo(() => {
-  const {toggleColorMode} = useColorMode()
+  const {toggleColorScheme, colorScheme} = useColorScheme()
 
   return (
-    <Fab
-      right="80px"
-      height="56px"
-      width="56px"
-      onPress={toggleColorMode}
-      _dark={{bg: 'white'}}
-      _light={{bg: 'black'}}
-      // FIXME: Add an icon
-      // icon={
-      //   <Icon
-      //     size={5}
-      //     _dark={{name: 'ios-sunny', color: 'black'}}
-      //     _light={{name: 'ios-moon', color: 'white'}}
-      //     as={Ionicons}
-      //   />
-      // }
-    />
+    <Fab onPress={toggleColorScheme}>
+      <Fab.Icon
+        type="material-community-icons"
+        name={
+          colorScheme === 'light'
+            ? 'moon-waning-gibbous'
+            : 'white-balance-sunny'
+        }
+        className="text-xl"
+      />
+    </Fab>
   )
 })
