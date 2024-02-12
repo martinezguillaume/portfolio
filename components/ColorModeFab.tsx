@@ -16,7 +16,7 @@ export const ColorModeFab = memo(() => {
             ? 'moon-waning-gibbous'
             : 'white-balance-sunny'
         }
-        className="text-xl"
+        className="!text-xl color-yellow-500"
       />
     </Fab>
   )
