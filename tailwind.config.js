@@ -20,6 +20,7 @@ module.exports = {
       },
       textColor: {
         primary: {
+          primary: 'var(--color-primary)',
           DEFAULT: 'var(--color-text-primary)',
         },
         secondary: {

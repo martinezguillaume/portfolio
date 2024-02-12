@@ -5,7 +5,7 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import {Linking, View} from 'react-native'
-import {useMemo} from 'react'
+import {useMemo, useState} from 'react'
 
 import {IMAGES} from '@/assets'
 import {useValues} from '@/hooks'
@@ -26,6 +26,7 @@ export const ListHeader = ({scrollY}: ListHeaderProps) => {
     smallAvatarHeight,
     headerHeight,
   } = useValues()
+  const [isDescExpanded, setIsDescExpanded] = useState(false)
 
   const data = useMemo<
     {description?: string; icon: IconProps; link?: string}[]
@@ -83,7 +84,14 @@ export const ListHeader = ({scrollY}: ListHeaderProps) => {
       <Text className="text-lg font-bold">Guillaume Martinez</Text>
       <Text className="text-secondary">{i18n.t('home.title')}</Text>
 
-      <Text className="mt-4">{i18n.t('home.description')}</Text>
+      <Text className="mt-4" numberOfLines={isDescExpanded ? undefined : 6}>
+        {i18n.t('home.description')}
+      </Text>
+      <Text
+        className="text-primary-primary py-1"
+        onPress={() => setIsDescExpanded(!isDescExpanded)}>
+        {isDescExpanded ? i18n.t('home.seeLess') : i18n.t('home.seeMore')}
+      </Text>
 
       <View className="flex-row flex-wrap mt-4 items-center">
         {data.map(item => (
