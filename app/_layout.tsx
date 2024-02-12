@@ -1,8 +1,14 @@
-import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native'
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+  useTheme,
+} from '@react-navigation/native'
 import {useAssets} from 'expo-asset'
 import {useFonts} from 'expo-font'
 import {Slot, SplashScreen} from 'expo-router'
 import {ReactNode, useEffect} from 'react'
+import * as SystemUI from 'expo-system-ui'
 import Feather from '@expo/vector-icons/Feather'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import {View} from 'react-native'
@@ -53,6 +59,12 @@ export default function RootLayout() {
 
 function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
   const {colorScheme} = useColorSchemeStore()
+  const {colors} = useTheme()
+
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(colors.background)
+  }, [colorScheme, colors.background])
+
   return (
     <View className="flex-1" style={themes[name][colorScheme]}>
       {children}
@@ -65,10 +77,10 @@ function RootLayoutNav() {
   const {colorScheme} = useColorSchemeStore()
 
   return (
-    <Theme name="twitter">
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Theme name="twitter">
         <Slot key={locale} />
-      </ThemeProvider>
-    </Theme>
+      </Theme>
+    </ThemeProvider>
   )
 }
