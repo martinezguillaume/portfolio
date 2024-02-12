@@ -1,9 +1,0 @@
-{
-  "background_color": "#000",
-  "display": "standalone",
-  "lang": "en",
-  "name": "portfolio",
-  "short_name": "portfolio",
-  "start_url": "/?utm_source=web_app_manifest",
-  "orientation": "portrait"
-}
