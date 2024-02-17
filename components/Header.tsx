@@ -48,6 +48,7 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
 
   const headerContentStyle = useAnimatedStyle(() => {
     return {
+      flex: 1,
       opacity: interpolate(
         scrollY.value,
         [headerThreshold, headerThreshold + 50],
@@ -108,7 +109,7 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
       <Image
         className="flex-1 !w-full"
         alt="cover"
-        source={IMAGES.cover}
+        source={colorScheme === 'dark' ? IMAGES.coverDark : IMAGES.cover}
         resizeMode="cover"
       />
 
@@ -122,8 +123,7 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
         style={{paddingTop: insets.top}}
         tint={colorScheme || undefined}
         animatedProps={blurViewProps}>
-        {/* eslint-disable-next-line react-native/no-inline-styles */}
-        <Animated.View style={[{flex: 1}, headerContentStyle]}>
+        <Animated.View style={headerContentStyle}>
           <View className="flex-1 flex-row items-center justify-center">
             <Image
               className="border-2 border-background-contrast !size-16 rounded-full"
