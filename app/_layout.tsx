@@ -4,6 +4,7 @@ import {
   ThemeProvider,
   useTheme,
 } from '@react-navigation/native'
+import {StatusBar} from 'expo-status-bar'
 import {useAssets} from 'expo-asset'
 import {useFonts} from 'expo-font'
 import {Slot, SplashScreen} from 'expo-router'
@@ -67,6 +68,7 @@ function Theme({name, children}: {name: ThemeName; children: ReactNode}) {
 
   return (
     <View className="flex-1" style={themes[name][colorScheme]}>
+      <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
       {children}
     </View>
   )
