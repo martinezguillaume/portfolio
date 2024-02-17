@@ -5,17 +5,13 @@ import {useColorSchemeStore} from '@/stores'
 import {Fab} from './base'
 
 export const ColorModeFab = memo(() => {
-  const {toggleColorScheme, colorScheme} = useColorSchemeStore()
+  const {toggleColorScheme} = useColorSchemeStore()
 
   return (
     <Fab onPress={toggleColorScheme}>
       <Fab.Icon
         type="material-community-icons"
-        name={
-          colorScheme === 'light'
-            ? 'moon-waning-gibbous'
-            : 'white-balance-sunny'
-        }
+        name="moon-waning-gibbous"
         className="!text-xl color-yellow-500"
       />
     </Fab>
