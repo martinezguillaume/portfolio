@@ -85,6 +85,11 @@ const skillIcon: Record<
     alt: 'expo',
     className: 'mx-[1]',
   },
+  rails: {
+    as: 'icon',
+    type: 'material-community-icons',
+    name: 'language-ruby-on-rails',
+  },
 }
 
 export const ListItem = memo<ListItemProps>(

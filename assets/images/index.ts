@@ -12,4 +12,5 @@ export const IMAGES = {
   design4green: require('./design4green.jpeg'),
   elium: require('./elium.webp'),
   goodbet: require('./goodbet.png'),
+  doctolib: require('./doctolib.jpg'),
 }

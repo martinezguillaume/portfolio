@@ -16,6 +16,7 @@ export type DataSkill =
   | 'java'
   | 'objective-c'
   | 'kotlin'
+  | 'rails'
 
 export type DataItem = {
   id: number
@@ -33,13 +34,29 @@ export type DataItem = {
 export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
   experiences: [
     {
+      id: 8,
+      avatar: IMAGES.doctolib,
+      title: 'Doctolib',
+      subtitle: 'Ingénieur logiciel',
+      location: 'Paris, France',
+      startDate: '2023-10-01',
+      endDate: '2024-02-02',
+      description:
+        "Ajout de nouvelles fonctionnalités à l'application mobile Doctolib patient\nMigration des composants et écrans existants vers react-native\nMise en place d'une stratégie de migration de l'existant vers du react-native\nMise en place d'une nouvelle architecture du projet mobile\nMise en place de tests d'intégrations et unitaires",
+      pictures: [
+        require('@/assets/images/doctolib-1.webp'),
+        require('@/assets/images/doctolib-2.webp'),
+      ],
+      skills: ['react-native', 'rails', 'swift', 'kotlin', 'ts'],
+    },
+    {
       id: 7,
       avatar: IMAGES.elium,
       title: 'Elium',
       subtitle: 'Développeur React-Native',
       location: 'Paris, France',
       startDate: '2022-03-01',
-      endDate: dayjs().format('YYYY-MM-DD'),
+      endDate: '2023-09-30',
       description:
         "Maintenance de l'application mobile\nAjouts de fonctionnalités\nMises à jour régulière des librairies dépendantes\nBugfix et optimisations diverses\nCI et automatisation de déploiements",
       pictures: [require('@/assets/images/elium-4.jpeg')],
@@ -126,6 +143,21 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
     },
   ],
   projects: [
+    {
+      id: 9,
+      avatar: IMAGES.doctolib,
+      startDate: '2023-10-01',
+      endDate: '2024-02-02',
+      title: 'Doctolib',
+      subtitle: 'Ingénieur logiciel',
+      description:
+        "Doctolib est le leader de la prise de rendez-vous en ligne avec aujourd'hui :\n• 80 millions de patients\n• 370 000 praticiens\nAvec Doctolib, gérez votre parcours de soin en toute tranquillité.",
+      skills: ['react-native', 'rails', 'ts', 'kotlin', 'swift'],
+      pictures: [
+        require('@/assets/images/doctolib-1.webp'),
+        require('@/assets/images/doctolib-2.webp'),
+      ],
+    },
     {
       id: 8,
       avatar: IMAGES.elium,
