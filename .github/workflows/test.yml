@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - uses: oven-sh/setup-bun@v1
       - name: Build web app
         run: bun run expo export -p web
       - name: Setup Pages
