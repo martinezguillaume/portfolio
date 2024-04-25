@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: oven-sh/setup-bun@v1
       - name: Build web app
-        run: bun run expo export -p web
+        run: bun expo export -p web
       - name: Setup Pages
         if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v3
