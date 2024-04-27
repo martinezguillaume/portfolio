@@ -1,4 +1,4 @@
-import {memo} from 'react'
+import {Fragment, memo} from 'react'
 import dayjs from 'dayjs'
 import {View, Image} from 'react-native'
 
@@ -10,61 +10,71 @@ export type ListItemProps = {
   data: DataItem
 }
 
-const skillIcon: Record<DataSkill, IconProps> = {
+const skillIcon: Record<DataSkill, IconProps & {title: string}> = {
   react: {
     type: 'material-community-icons',
     name: 'react',
+    title: 'React',
   },
   aws: {
     type: 'material-community-icons',
     name: 'aws',
-    className: 'text-2xl',
+    title: 'AWS',
   },
   html: {
     type: 'material-community-icons',
     name: 'language-html5',
+    title: 'HTML',
   },
   css: {
     type: 'material-community-icons',
     name: 'language-css3',
+    title: 'CSS',
   },
   js: {
     type: 'material-community-icons',
     name: 'language-javascript',
+    title: 'JavaScript',
   },
   ts: {
     type: 'material-community-icons',
     name: 'language-typescript',
+    title: 'TypeScript',
   },
   graphql: {
     type: 'material-community-icons',
     name: 'graphql',
+    title: 'GraphQL',
   },
   'react-native': {
     type: 'material-community-icons',
     name: 'react',
+    title: 'React-Native',
   },
   java: {
     type: 'material-community-icons',
     name: 'language-java',
-    className: 'text-2xl',
+    title: 'Java',
   },
   kotlin: {
     type: 'material-community-icons',
     name: 'language-kotlin',
-    className: '!text-lg',
+    title: 'Kotlin',
   },
   swift: {
     type: 'material-community-icons',
     name: 'language-swift',
+    title: 'Swift',
   },
   rails: {
     type: 'material-community-icons',
     name: 'language-ruby-on-rails',
+    title: 'Rails',
   },
   firebase: {
     type: 'material-community-icons',
     name: 'firebase',
+    title: 'Firebase',
   },
 }
 
@@ -118,11 +128,12 @@ export const ListItem = memo<ListItemProps>(
               {skills.map(skill => {
                 const icon = skillIcon[skill]
                 return (
-                  <Icon
-                    key={skill}
-                    {...icon}
-                    className={`text-secondary ${icon.className} !text-xl`}
-                  />
+                  <Fragment key={skill}>
+                    <Icon className="text-secondary !text-lg" {...icon} />
+                    <Text className="text-secondary text-sm ml-1 mr-2 capitalize">
+                      {icon.title}
+                    </Text>
+                  </Fragment>
                 )
               })}
             </View>
