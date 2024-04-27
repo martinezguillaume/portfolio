@@ -15,7 +15,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import {View} from 'react-native'
 
 import {useColorSchemeStore, useLocalStore} from '@/stores'
-import {ICONS, IMAGES} from '@/assets'
+import {IMAGES} from '@/assets'
 import {ThemeName, themes} from '@/themes'
 import '../global.css'
 
@@ -28,10 +28,7 @@ export default function RootLayout() {
     ...MaterialCommunityIcons.font,
   })
 
-  const [assets, assetsError] = useAssets([
-    ...Object.values(IMAGES),
-    ...Object.values(ICONS),
-  ])
+  const [assets, assetsError] = useAssets(Object.values(IMAGES))
 
   const isLoading = !fontsLoaded || !assets
 

@@ -1,9 +1,8 @@
 import {memo} from 'react'
 import dayjs from 'dayjs'
-import {ImageProps, View, Image} from 'react-native'
+import {View, Image} from 'react-native'
 
 import {DataItem, DataSkill} from '@/data'
-import {ICONS} from '@/assets'
 
 import {Icon, IconProps, Text} from './base'
 
@@ -11,84 +10,61 @@ export type ListItemProps = {
   data: DataItem
 }
 
-const skillIcon: Record<
-  DataSkill,
-  ({as?: 'icon'} & IconProps) | ({as: 'image'} & ImageProps)
-> = {
+const skillIcon: Record<DataSkill, IconProps> = {
   react: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'react',
   },
   aws: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'aws',
     className: 'text-2xl',
   },
   html: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-html5',
   },
   css: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-css3',
   },
   js: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-javascript',
   },
   ts: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-typescript',
   },
   graphql: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'graphql',
   },
   'react-native': {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'react',
   },
   java: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-java',
     className: 'text-2xl',
   },
   kotlin: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-kotlin',
     className: '!text-lg',
   },
   swift: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-swift',
   },
-  'objective-c': {
-    as: 'image',
-    source: ICONS['objective-c'],
-    alt: 'objective-c',
-    className: 'size-6',
-  },
-  expo: {
-    as: 'image',
-    source: ICONS.expo,
-    alt: 'expo',
-    className: 'mx-[1]',
-  },
   rails: {
-    as: 'icon',
     type: 'material-community-icons',
     name: 'language-ruby-on-rails',
+  },
+  firebase: {
+    type: 'material-community-icons',
+    name: 'firebase',
   },
 }
 
@@ -141,24 +117,13 @@ export const ListItem = memo<ListItemProps>(
             <View className="flex-row items-center">
               {skills.map(skill => {
                 const icon = skillIcon[skill]
-                if (icon.as === 'image') {
-                  return (
-                    <Image
-                      key={skill}
-                      resizeMode="contain"
-                      {...icon}
-                      className={`!size-4 color-secondary ${icon.className}`}
-                    />
-                  )
-                } else {
-                  return (
-                    <Icon
-                      key={skill}
-                      {...icon}
-                      className={`text-secondary ${icon.className} !text-xl`}
-                    />
-                  )
-                }
+                return (
+                  <Icon
+                    key={skill}
+                    {...icon}
+                    className={`text-secondary ${icon.className} !text-xl`}
+                  />
+                )
               })}
             </View>
           )}
