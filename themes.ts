@@ -1,7 +1,6 @@
 import {vars, cssInterop} from 'nativewind'
 import Feather from '@expo/vector-icons/Feather'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import {Image} from 'react-native'
 
 cssInterop(Feather, {
   className: {
@@ -12,15 +11,6 @@ cssInterop(Feather, {
 cssInterop(MaterialCommunityIcons, {
   className: {
     target: 'style',
-  },
-})
-
-cssInterop(Image, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: {
-      color: 'tintColor',
-    },
   },
 })
 
