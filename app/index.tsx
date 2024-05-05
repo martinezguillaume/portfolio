@@ -10,6 +10,7 @@ import {
   ColorModeFab,
   Background,
   ListHeader,
+  SkyBackground,
 } from '@/components'
 import {data} from '@/data'
 import {i18n} from '@/i18n'
@@ -34,8 +35,11 @@ export default function Home(): ReactElement {
   return (
     <>
       <Background />
+      <SkyBackground />
 
       <View className="flex-1 max-w-screen-sm web:sm:self-center sm:border-x border-divider">
+        <Background className="hidden sm:flex" />
+
         <Header scrollY={scrollY} />
 
         <TabView

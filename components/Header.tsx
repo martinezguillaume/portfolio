@@ -102,10 +102,7 @@ export const Header = memo<HeaderProps>(({scrollY}) => {
   })
 
   return (
-    <Animated.View
-      pointerEvents="none"
-      className="absolute left-0 right-0"
-      style={headerStyle}>
+    <Animated.View className="absolute left-0 right-0" style={headerStyle}>
       <Image
         className="flex-1 !w-full"
         alt="cover"
