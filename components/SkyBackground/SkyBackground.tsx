@@ -69,6 +69,11 @@ const Star = memo(
           getRandomInt(0, 3000),
           withRepeat(withTiming(1, {duration: 2000}), -1, true),
         )
+      } else {
+        opacity.value = withDelay(
+          getRandomInt(0, 10000),
+          withTiming(getRandomInt(0.1, 1), {duration: 2000}),
+        )
       }
     }, [animated, opacity])
 
@@ -79,7 +84,7 @@ const Star = memo(
         width={size}
         height={size}
         r={size / 2}
-        opacity={animated ? opacity : getRandomInt(0.1, 1)}
+        opacity={opacity}
         color="white"
       />
     )
