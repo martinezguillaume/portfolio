@@ -143,7 +143,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
   ],
   projects: [
     {
-      id: 9,
+      id: 10,
       avatar: IMAGES.doctolib,
       startDate: '2023-10-01',
       endDate: '2024-02-02',
@@ -159,7 +159,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       ],
     },
     {
-      id: 8,
+      id: 9,
       avatar: IMAGES.elium,
       startDate: '2022-03-01',
       endDate: '2023-09-01',
@@ -175,7 +175,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       ],
     },
     {
-      id: 7,
+      id: 8,
       avatar: IMAGES.faks,
       startDate: '2021-07-01',
       endDate: '2023-08-01',
@@ -191,7 +191,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       ],
     },
     {
-      id: 6,
+      id: 7,
       avatar: IMAGES.milinus,
       title: 'Milinus',
       subtitle: 'Développeur React-Native/React',
@@ -205,7 +205,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       skills: ['react-native', 'ts', 'graphql', 'kotlin', 'swift'],
     },
     {
-      id: 5,
+      id: 6,
       avatar: IMAGES.goodbet,
       title: 'GoodBet',
       subtitle: 'Développeur React-Native',
@@ -219,7 +219,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       skills: ['react-native', 'graphql', 'firebase'],
     },
     {
-      id: 4,
+      id: 5,
       avatar: IMAGES.nobelGame,
       title: 'Nobel Game',
       subtitle: 'Développeur React-Native',
@@ -233,7 +233,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       skills: ['react-native', 'graphql'],
     },
     {
-      id: 3,
+      id: 4,
       avatar: IMAGES.tamers,
       title: 'Tamers',
       subtitle: 'Développeur React-Native',
@@ -248,7 +248,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       skills: ['react-native', 'graphql'],
     },
     {
-      id: 2,
+      id: 3,
       avatar: IMAGES.design4green,
       title: 'Design4Green',
       startDate: '2018-11-01',
@@ -259,7 +259,7 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       skills: ['react', 'aws'],
     },
     {
-      id: 1,
+      id: 2,
       avatar: IMAGES.safetyOlympicsSodexo,
       title: 'Safety Olympics - Sodexo',
       subtitle: 'Développeur React',
@@ -271,6 +271,17 @@ export const data: Record<'experiences' | 'projects', Array<DataItem>> = {
       description:
         'Safety olympics est une application multilingue iOS et Android destinée aux employés de la société Sodexo. Ce serious game propose de tester et compléter ses connaissance en identifiant les dangers et les risques pour la sécurité des personnes sur leur lieu de travail puis en trouvant les meilleures actions correctives. Le multilingue permet de rivaliser avec les autres équipes de Sodexo à travers le monde.',
       skills: ['react', 'firebase'],
+    },
+    {
+      id: 1,
+      avatar: IMAGES.vertical,
+      title: 'Vertical',
+      subtitle: 'Développeur React-Native',
+      pictures: [require('@/assets/images/vertical-1.jpg')],
+      startDate: '2017-08-01',
+      description:
+        'Vertical est une application qui tire son nom du format vidéo des smartphones. Son objectif ? Partager du contenu vidéo pour vous divertir. Elle propose en exclusivité des vidéos de vos influenceurs préférés.\nAvec plus de 100 000 téléchargements, l’application adaptée au support mobile héberge trois webséries mêlant humour et réalisation nouveaux usages.',
+      skills: ['react-native', 'js'],
     },
   ],
 }

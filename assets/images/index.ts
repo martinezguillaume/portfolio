@@ -13,4 +13,5 @@ export const IMAGES = {
   elium: require('./elium.webp'),
   goodbet: require('./goodbet.png'),
   doctolib: require('./doctolib.jpg'),
+  vertical: require('./vertical.png'),
 }
